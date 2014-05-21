@@ -31,7 +31,7 @@ class ItemList extends FormWidgetBase
     public function prepareVars()
     {
         $toolbarConfig = $this->makeConfig();
-        $toolbarConfig->buttons = '@/plugins/flynsarmy/menu/controllers/menus/_items_toolbar.htm';
+        $toolbarConfig->buttons = '@/plugins/flynsarmy/menu/formwidgets/itemlist/partials/_toolbar.htm';
 
         $this->vars['toolbar'] = $this->makeWidget('Backend\Widgets\Toolbar', $toolbarConfig);
 
