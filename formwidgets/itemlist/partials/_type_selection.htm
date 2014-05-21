@@ -6,7 +6,7 @@
 
     <ul class='selectable_list'>
         <?php foreach ( $item_types as $class => $details ): ?>
-            <li>
+            <li data-dismiss="modal" data-control="popup" data-handler="onLoadCreateItem" data-request-data="type_id: '<?= $details['alias'] ?>'">
                 <label>
                     <span class='title'><?= $details['label'] ?></span>
                     <?php if ( !empty($details['description']) ): ?>

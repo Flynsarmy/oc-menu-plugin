@@ -1,0 +1,33 @@
+<?php if (!isset($fatalError)): ?>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="chooseTypeLabel">New <?= $itemType['label'] ?></h4>
+    </div>
+    <div class="modal-body">
+        <?= $form->render() ?>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <a href="<?= Backend::url('flynsarmy/menu/items/create') ?>" data-toggle="modal" data-target="#item_modal" class="btn btn-primary oc-icon-plus">Add Item</a>
+    </div>
+
+<?php else: ?>
+    <div class="modal-body">
+        <div class="callout callout-danger">
+            <div class="header">
+                <i class="icon-warning"></i>
+                <h3>Error</h3>
+                <p><?= $fatalError ?></p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button
+            type="button"
+            class="btn btn-default"
+            data-dismiss="popup">
+            <?= e(trans('backend::lang.form.close')) ?>
+        </button>
+    </div>
+<?php endif ?>
