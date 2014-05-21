@@ -1,0 +1,26 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+  enabled:
+    label: Enabled?
+    type: checkbox
+    comment: Disabled menu items and their children won't appear in the menu
+
+  id_attrib:
+    label: ID Attribute
+    span: left
+
+  class_attrib:
+    label: Class Attribute
+    span: right
+
+  label:
+    label: Navigation Label
+    span: left
+
+  title_attrib:
+    label: Title Attribute
+    span: right
+

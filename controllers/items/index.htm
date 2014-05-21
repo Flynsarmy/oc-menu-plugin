@@ -1,0 +1,13 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h4 class="modal-title" id="chooseTypeLabel">Choose a Type</h4>
+</div>
+<div class="modal-body">
+	<?= $this->makePartial('item_type_list', [
+		'sessionId' => $sessionId,
+		'item_types' => $item_types
+	]); ?>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+</div>

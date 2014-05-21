@@ -1,0 +1,9 @@
+/* october.css has .control-toolbar{font-size:0} to fix white space issues. This breaks modals, so present a working size */
+.modal .modal-content {font-size:12px;}
+
+.selectable_list {padding-left:0;}
+.selectable_list li {list-style:none;padding:5px 10px;border-bottom:1px solid #e1e1e8;}
+.selectable_list li:hover {background:#428bca;color:white;cursor:pointer;}
+.selectable_list label {cursor:pointer;}
+.selectable_list span {display:block;}
+.selectable_list span.description {font-weight:normal;}

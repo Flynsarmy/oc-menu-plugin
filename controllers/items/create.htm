@@ -1,0 +1,31 @@
+<?php if (!$this->fatalError): ?>
+	<?= Form::open(['class'=>'layout-item stretch layout-column', 'data-request' => 'onAddItem', 'data-stripe-load-indicator' => true]) ?>
+
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h4 class="modal-title" id="chooseTypeLabel">New <?= $this->itemTypes[$type]['label'] ?></h4>
+		</div>
+		<div class="modal-body">
+			<?= $this->formRender() ?>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			<a href="<?= Backend::url('flynsarmy/menu/items/create') ?>" data-toggle="modal" data-target="#item_modal" class="btn btn-primary oc-icon-plus">Add Item</a>
+		</div>
+
+	<?= Form::close() ?>
+
+<?php else: ?>
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title" id="chooseTypeLabel">New Menu Item</h4>
+	</div>
+	<div class="modal-body">
+		<p class="flash-message static error"><?= e($this->fatalError) ?></p>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	</div>
+
+<?php endif ?>

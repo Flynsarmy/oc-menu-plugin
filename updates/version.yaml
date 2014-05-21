@@ -1,1 +1,4 @@
-1.0.1: First version of Menus
+1.0.1:
+    - Plugin Initialization
+    - create_menus_table.php
+    - create_menuitems_table.php

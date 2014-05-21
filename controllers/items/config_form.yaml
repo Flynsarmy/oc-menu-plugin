@@ -1,0 +1,27 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: MenuItem
+
+# Model Form Field configuration
+form: @/plugins/flynsarmy/menu/models/menuitem/fields.yaml
+
+# Model Class name
+modelClass: Flynsarmy\Menu\Models\MenuItem
+
+# Default redirect location
+defaultRedirect: flynsarmy/menu/items
+
+# Create page
+create:
+    title: Create Menu Item
+    redirect: flynsarmy/menu/menus/update/:id
+    redirectClose: flynsarmy/menu/menus
+
+# Update page
+update:
+    title: Edit Menu Item
+    redirect: flynsarmy/menu/menus
+    redirectClose: flynsarmy/menu/menus

@@ -1,0 +1,18 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+tabs:
+  fields:
+    name:
+        label: Name
+        tab: Details
+
+    short_desc:
+        label: Short Description
+        tab: Details
+
+    items:
+        type: Flynsarmy\Menu\FormWidgets\ItemList
+        size: huge
+        tab: Fields
