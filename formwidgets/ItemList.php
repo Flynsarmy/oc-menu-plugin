@@ -1,6 +1,7 @@
 <?php namespace Flynsarmy\Menu\FormWidgets;
 
 use Backend\Classes\FormWidgetBase;
+use Flynsarmy\Menu\Classes\MenuManager;
 
 /**
  * Rich Editor
@@ -30,11 +31,6 @@ class ItemList extends FormWidgetBase
      */
     public function prepareVars()
     {
-        $toolbarConfig = $this->makeConfig();
-        $toolbarConfig->buttons = '@/plugins/flynsarmy/menu/formwidgets/itemlist/partials/_toolbar.htm';
-
-        $this->vars['toolbar'] = $this->makeWidget('Backend\Widgets\Toolbar', $toolbarConfig);
-
         $this->vars['stretch'] = $this->formField->stretch;
         $this->vars['size'] = $this->formField->size;
         $this->vars['name'] = $this->formField->getName();
@@ -50,6 +46,12 @@ class ItemList extends FormWidgetBase
         $this->addCss('css/itemlist.css');
         $this->addJs('vendor/redactor/redactor.js');
         $this->addJs('js/itemlist.js');
+    }
+
+    public function onLoadTypeSelection()
+    {
+        $this->vars['item_types'] = MenuManager::instance()->listItemTypes();
+        return $this->makePartial('type_selection');
     }
 
 }
