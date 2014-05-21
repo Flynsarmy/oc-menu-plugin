@@ -73,7 +73,12 @@ class ItemList extends FormWidgetBase
             $config = $this->makeConfig('@/plugins/flynsarmy/menu/models/menuitem/fields.yaml');
             $config->model = new MenuItem;
             $config->context = 'create';
-            $this->vars['form'] = $this->makeWidget('Backend\Widgets\Form', $config);
+            $form = $this->makeWidget('Backend\Widgets\Form', $config);
+
+            $itemTypeObj = new $type;
+            $itemTypeObj->formExtendFields($form);
+
+            $this->vars['form'] = $form;
 
         }
         catch (Exception $ex) {
