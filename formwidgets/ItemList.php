@@ -90,4 +90,9 @@ class ItemList extends FormWidgetBase
         return $this->makePartial('create_item');
     }
 
+    public function onCreateItem()
+    {
+        \Log::info(print_r($_POST, true));
+    }
+
 }
