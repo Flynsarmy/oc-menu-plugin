@@ -11,31 +11,31 @@ use Model;
  */
 class Menuitem extends Model
 {
-    /**
-     * @var string The database table used by the model.
-     */
-    public $table = 'flynsarmy_menu_menuitems';
+	/**
+	 * @var string The database table used by the model.
+	 */
+	public $table = 'flynsarmy_menu_menuitems';
 
-    public $implement = ['October.Rain.Database.Behaviors.NestedSetModel'];
+	public $implement = ['October.Rain.Database.Behaviors.NestedSetModel'];
 
-    /**
-     * @var array Guarded fields
-     */
-    protected $guarded = ['*'];
+	/**
+	 * @var array Guarded fields
+	 */
+	protected $guarded = ['*'];
 
-    /**
-     * @var array Fillable fields
-     */
-    protected $fillable = ['enabled', 'label', 'title_attrib', 'id_attrib', 'class_attrib', 'url', 'parent_id'];
+	/**
+	 * @var array Fillable fields
+	 */
+	protected $fillable = ['enabled', 'label', 'title_attrib', 'id_attrib', 'class_attrib', 'url', 'parent_id'];
 
-    public $belongsTo = [
-        'menu' => ['Flynsarmy\Menu\Models\Menu'],
-    ];
+	public $belongsTo = [
+		'menu' => ['Flynsarmy\Menu\Models\Menu'],
+	];
 
-    /**
-     * @var array Validation rules
-     */
-    public $rules = [
-        'label' => 'required'
-    ];
+	/**
+	 * @var array Validation rules
+	 */
+	public $rules = [
+		'label' => 'required'
+	];
 }

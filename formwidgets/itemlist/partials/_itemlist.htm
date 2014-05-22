@@ -1,36 +1,36 @@
 <?= $this->makePartial('toolbar') ?>
 
 <div
-    id="itemTreeList"
-    class="control-treelist"
-    data-control="treelist"
-    data-handle="a.move"
-    data-stripe-load-indicator>
-    <ol id="reorderRecords">
-        <?php //$this->makePartial('item_records', ['records' => $records]) ?>
-    </ol>
+	id="itemTreeList"
+	class="control-treelist"
+	data-control="treelist"
+	data-handle="a.move"
+	data-stripe-load-indicator>
+	<ol id="reorderRecords">
+		<?php //$this->makePartial('item_records', ['records' => $records]) ?>
+	</ol>
 </div>
 
 <script>
 
-    /*
-     * Post back source and target nodes IDs and the move positioning.
-     */
-    $('#itemTreeList').on('move.oc.treelist', function(ev, data){
-        var
-            $el,
-            $item = data.item,
-            moveData = { sourceNode: $item.data('recordId'), position: 'root', targetNode: 0 }
+	/*
+	 * Post back source and target nodes IDs and the move positioning.
+	 */
+	$('#itemTreeList').on('move.oc.treelist', function(ev, data){
+		var
+			$el,
+			$item = data.item,
+			moveData = { sourceNode: $item.data('recordId'), position: 'root', targetNode: 0 }
 
-        if (($el = $item.next()) && $el.length) moveData.position = 'before'
-        else if (($el = $item.prev()) && $el.length) moveData.position = 'after'
-        else if (($el = $item.parents('li:first')) && $el.length) moveData.position = 'child'
+		if (($el = $item.next()) && $el.length) moveData.position = 'before'
+		else if (($el = $item.prev()) && $el.length) moveData.position = 'after'
+		else if (($el = $item.parents('li:first')) && $el.length) moveData.position = 'child'
 
-        if ($el.length) moveData.targetNode = $el.data('recordId')
+		if ($el.length) moveData.targetNode = $el.data('recordId')
 
-        $('#itemTreeList').request('onMove', {
-            data: moveData
-        })
-    })
+		$('#itemTreeList').request('onMove', {
+			data: moveData
+		})
+	})
 
 </script>

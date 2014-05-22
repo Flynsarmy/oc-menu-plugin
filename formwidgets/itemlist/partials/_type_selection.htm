@@ -1,23 +1,23 @@
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h4 class="modal-title" id="chooseTypeLabel">Choose a Type</h4>
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h4 class="modal-title" id="chooseTypeLabel">Choose a Type</h4>
 </div>
 <div class="modal-body">
 
-    <ul class='selectable_list'>
-        <?php foreach ( $item_types as $class => $details ): ?>
-            <li data-dismiss="modal" data-control="popup" data-handler="onLoadCreateItem" data-request-data="type_id: '<?= $details['alias'] ?>'">
-                <label>
-                    <span class='title'><?= $details['label'] ?></span>
-                    <?php if ( !empty($details['description']) ): ?>
-                        <span class='description'><?= $details['description'] ?></span>
-                    <?php endif; ?>
-                </label>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+	<ul class='selectable_list'>
+		<?php foreach ( $item_types as $class => $details ): ?>
+			<li data-dismiss="modal" data-control="popup" data-handler="onLoadCreateItem" data-request-data="type_id: '<?= $details['alias'] ?>'">
+				<label>
+					<span class='title'><?= $details['label'] ?></span>
+					<?php if ( !empty($details['description']) ): ?>
+						<span class='description'><?= $details['description'] ?></span>
+					<?php endif; ?>
+				</label>
+			</li>
+		<?php endforeach; ?>
+	</ul>
 
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+	<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 </div>

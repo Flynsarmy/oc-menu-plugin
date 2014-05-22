@@ -14,85 +14,86 @@ use Exception;
  */
 class ItemList extends FormWidgetBase
 {
-    /**
-     * {@inheritDoc}
-     */
-    public $defaultAlias = 'itemlist';
+	/**
+	 * {@inheritDoc}
+	 */
+	public $defaultAlias = 'itemlist';
 
-    /**
-     * {@inheritDoc}
-     */
-    public function render()
-    {
-        $this->prepareVars();
-        return $this->makePartial('itemlist');
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	public function render()
+	{
+		$this->prepareVars();
+		return $this->makePartial('itemlist');
+	}
 
-    /**
-     * Prepares the list data
-     */
-    public function prepareVars()
-    {
-        $this->vars['stretch'] = $this->formField->stretch;
-        $this->vars['size'] = $this->formField->size;
-        $this->vars['name'] = $this->formField->getName();
-        $this->vars['value'] = $this->model->{$this->columnName};
-    }
+	/**
+	 * Prepares the list data
+	 */
+	public function prepareVars()
+	{
+		$this->vars['stretch'] = $this->formField->stretch;
+		$this->vars['size'] = $this->formField->size;
+		$this->vars['name'] = $this->formField->getName();
+		$this->vars['value'] = $this->model->{$this->columnName};
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public function loadAssets()
-    {
-        $this->addCss('vendor/redactor/redactor.css');
-        $this->addCss('css/itemlist.css');
-        $this->addJs('vendor/redactor/redactor.js');
-        $this->addJs('js/itemlist.js');
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	public function loadAssets()
+	{
+		$this->addCss('vendor/redactor/redactor.css');
+		$this->addCss('css/itemlist.css');
+		$this->addJs('vendor/redactor/redactor.js');
+		$this->addJs('js/itemlist.js');
+	}
 
-    public function onLoadTypeSelection()
-    {
-        $this->vars['item_types'] = MenuManager::instance()->listItemTypes();
-        return $this->makePartial('type_selection');
-    }
+	public function onLoadTypeSelection()
+	{
+		$this->vars['item_types'] = MenuManager::instance()->listItemTypes();
+		return $this->makePartial('type_selection');
+	}
 
-    public function onLoadCreateItem()
-    {
-        try {
-            $type = post('type_id');
-            if (!$type = MenuManager::instance()->resolveItemType($type))
-                throw new Exception('Invalid item type: '. post('type_id'));
+	public function onLoadCreateItem()
+	{
+		try {
+			$type = post('type_id');
+			if (!$type = MenuManager::instance()->resolveItemType($type))
+				throw new Exception('Invalid item type: '. post('type_id'));
 
-            $this->vars['type'] = $type;
-            $itemTypes = MenuManager::instance()->listItemTypes();
-            $this->vars['itemType'] = $itemTypes[$type];
+			$this->vars['type'] = $type;
+			$itemTypes = MenuManager::instance()->listItemTypes();
+			$this->vars['itemType'] = $itemTypes[$type];
 
-            /*
-             * Create a form widget to render the form
-             */
-            $config = $this->makeConfig('@/plugins/flynsarmy/menu/models/menuitem/fields.yaml');
-            $config->model = new MenuItem;
-            $config->context = 'create';
-            $form = $this->makeWidget('Backend\Widgets\Form', $config);
+			/*
+			 * Create a form widget to render the form
+			 */
+			$config = $this->makeConfig('@/plugins/flynsarmy/menu/models/menuitem/fields.yaml');
+			$config->model = new MenuItem;
+			$config->context = 'create';
+			$form = $this->makeWidget('Backend\Widgets\Form', $config);
 
-            $form->bindEvent('form.extendFields', function($widget) use ($type){
-                $itemTypeObj = new $type;
-                $itemTypeObj->formExtendFields($widget);
-            });
+			$form->bindEvent('form.extendFields', function($widget) use ($type){
+				$itemTypeObj = new $type;
+				$itemTypeObj->formExtendFields($widget);
+			});
 
-            $this->vars['form'] = $form;
+			$this->vars['form'] = $form;
 
-        }
-        catch (Exception $ex) {
-            $this->vars['fatalError'] = $ex->getMessage();
-        }
+		}
+		catch (Exception $ex) {
+			$this->vars['fatalError'] = $ex->getMessage();
+		}
 
-        return $this->makePartial('create_item');
-    }
+		return $this->makePartial('create_item');
+	}
 
-    public function onCreateItem()
-    {
-        \Log::info(print_r($_POST, true));
-    }
+	public function onCreateItem()
+	{
+		// $this->controller->createModel()->items()->add($item, $this->controller->formGetSessionKey());
+		\Log::info(print_r($_POST, true));
+	}
 
 }
