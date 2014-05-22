@@ -7,7 +7,7 @@
 	data-handle="a.move"
 	data-stripe-load-indicator>
 	<ol id="reorderRecords">
-		<?php //$this->makePartial('item_records', ['records' => $records]) ?>
+		<?= $this->makePartial('item_records', ['records' => $value]) ?>
 	</ol>
 </div>
 
@@ -28,7 +28,7 @@
 
 		if ($el.length) moveData.targetNode = $el.data('recordId')
 
-		$('#itemTreeList').request('onMove', {
+		$('#itemTreeList').request('<?= $this->getEventHandler('onMove') ?>', {
 			data: moveData
 		})
 	})

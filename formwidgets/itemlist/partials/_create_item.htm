@@ -1,6 +1,9 @@
 <?php if (!isset($fatalError)): ?>
+	<script>
+		function onCreateItem()
+	</script>
 
-	<form data-request="<?= $this->getEventHandler('onCreateItem') ?>" data-stripe-load-indicator>
+	<form data-request="<?= $this->getEventHandler('onCreateItem') ?>" data-request-success="$el.closest('.modal').modal('hide');" data-stripe-load-indicator>
 
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

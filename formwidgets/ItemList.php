@@ -91,13 +91,35 @@ class ItemList extends FormWidgetBase
 
 	public function onCreateItem()
 	{
+		$menu = $this->controller->widget->form->model->exists() ?
+			$this->controller->widget->form->model : new Menu;
+
 		$item = new MenuItem;
 		$item->fill(Request::input());
 		$item->save();
 
-		with(new Menu)->items()->add($item, Request::input('_session_key'));
+		$menu->items()->add($item, Request::input('_session_key'));
 
 		// \Log::info(print_r($_POST, true));
+		$this->prepareVars();
+		return [
+			'#reorderRecords' => $this->makePartial('item_records', ['records' => $this->vars['value']])
+		];
 	}
 
+	public function onMove()
+	{
+		$sourceNode = MenuItem::find(post('sourceNode'));
+		$targetNode = post('targetNode') ? MenuItem::find(post('targetNode')) : null;
+
+		if ($sourceNode == $targetNode)
+			return;
+
+		switch (post('position')) {
+			case 'before': $sourceNode->moveBefore($targetNode); break;
+			case 'after': $sourceNode->moveAfter($targetNode); break;
+			case 'child': $sourceNode->makeChildOf($targetNode); break;
+			default: $sourceNode->makeRoot(); break;
+		}
+	}
 }
