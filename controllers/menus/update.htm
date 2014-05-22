@@ -6,16 +6,7 @@
 <?php Block::endPut() ?>
 
 <?php if (!$this->fatalError): ?>
-
-	<script>
-		jQuery.fn.setCreateFormSessionKey = function() {
-			$(this).closest('FORM').data('request-data', { _session_key: $('#persistedSessionKey').val() });
-		}
-	</script>
-
 	<?= Form::open(['class'=>'layout-item stretch layout-column']) ?>
-
-		<input type="hidden" name="persisted_session_key" id="persistedSessionKey" value="<?= $this->formGetSessionKey() ?>" />
 
 		<?= $this->formRender() ?>
 
@@ -24,11 +15,12 @@
 				<button
 					type="submit"
 					data-request="onSave"
+					data-request-data="redirect:0"
 					data-hotkey="ctrl+s"
 					data-hotkey-mac="cmd+s"
-					data-load-indicator="Creating Menu..."
+					data-load-indicator="Saving Menu..."
 					class="btn btn-primary">
-					Create
+					<u>S</u>ave
 				</button>
 				<button
 					type="button"
@@ -36,9 +28,16 @@
 					data-request-data="close:1"
 					data-hotkey="ctrl+enter"
 					data-hotkey-mac="cmd+enter"
-					data-load-indicator="Creating Menu..."
+					data-load-indicator="Saving Menu..."
 					class="btn btn-default">
-					Create and Close
+					Save and Close
+				</button>
+				<button
+					type="button"
+					class="oc-icon-trash-o btn-icon danger pull-right"
+					data-request="onDelete"
+					data-load-indicator="Deleting Menu..."
+					data-request-confirm="Do you really want to delete this menu?">
 				</button>
 				<span class="btn-text">
 					or <a href="<?= Backend::url('flynsarmy/menu/menus') ?>">Cancel</a>
