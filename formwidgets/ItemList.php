@@ -1,6 +1,8 @@
 <?php namespace Flynsarmy\Menu\FormWidgets;
 
+use Request;
 use Backend\Classes\FormWidgetBase;
+use Flynsarmy\Menu\Models\Menu;
 use Flynsarmy\Menu\Models\MenuItem;
 use Flynsarmy\Menu\Classes\MenuManager;
 use Exception;
@@ -44,10 +46,7 @@ class ItemList extends FormWidgetBase
 	 */
 	public function loadAssets()
 	{
-		$this->addCss('vendor/redactor/redactor.css');
-		$this->addCss('css/itemlist.css');
-		$this->addJs('vendor/redactor/redactor.js');
-		$this->addJs('js/itemlist.js');
+		// $this->addJs('js/itemlist.js');
 	}
 
 	public function onLoadTypeSelection()
@@ -92,8 +91,13 @@ class ItemList extends FormWidgetBase
 
 	public function onCreateItem()
 	{
-		// $this->controller->createModel()->items()->add($item, $this->controller->formGetSessionKey());
-		\Log::info(print_r($_POST, true));
+		$item = new MenuItem;
+		$item->fill(Request::input());
+		$item->save();
+
+		with(new Menu)->items()->add($item, Request::input('_session_key'));
+
+		// \Log::info(print_r($_POST, true));
 	}
 
 }

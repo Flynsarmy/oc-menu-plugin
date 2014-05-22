@@ -13,12 +13,12 @@ class CreateMenuitemsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('menu_id')->unsigned()->index();
-            $table->boolean('enabled');
-            $table->string('label');
-            $table->string('title_attrib');
-            $table->string('id_attrib');
-            $table->string('class_attrib');
-            $table->string('url');
+            $table->boolean('enabled')->index();
+            $table->string('label')->nullable()->default('');
+            $table->string('title_attrib')->nullable()->default('');
+            $table->string('id_attrib')->nullable()->default('');
+            $table->string('class_attrib')->nullable()->default('');
+            $table->string('url')->nullable()->default('');
 
             // Nesting
             $table->integer('parent_id')->unsigned()->index();
