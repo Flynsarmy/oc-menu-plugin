@@ -1,8 +1,4 @@
 <?php if (!isset($fatalError)): ?>
-	<script>
-		function onCreateItem()
-	</script>
-
 	<form data-request="<?= $this->getEventHandler('onCreateItem') ?>" data-request-success="$el.closest('.modal').modal('hide');" data-stripe-load-indicator>
 
 		<div class="modal-header">

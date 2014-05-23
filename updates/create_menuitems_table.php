@@ -14,11 +14,11 @@ class CreateMenuitemsTable extends Migration
             $table->increments('id');
             $table->integer('menu_id')->unsigned()->index();
             $table->boolean('enabled')->index();
-            $table->string('label')->nullable()->default('');
-            $table->string('title_attrib')->nullable()->default('');
-            $table->string('id_attrib')->nullable()->default('');
-            $table->string('class_attrib')->nullable()->default('');
-            $table->string('url')->nullable()->default('');
+            $table->string('label')->default('');
+            $table->string('title_attrib')->default('');
+            $table->string('id_attrib')->default('');
+            $table->string('class_attrib')->default('');
+            $table->string('url')->default('');
 
             // Nesting
             $table->integer('parent_id')->unsigned()->index();
