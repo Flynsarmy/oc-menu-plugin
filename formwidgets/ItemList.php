@@ -35,10 +35,13 @@ class ItemList extends FormWidgetBase
 	 */
 	public function prepareVars()
 	{
+		$sessionKey = $this->controller->widget->formItems->sessionKey;
+		$columnName = $this->columnName;
+
 		$this->vars['stretch'] = $this->formField->stretch;
 		$this->vars['size'] = $this->formField->size;
 		$this->vars['name'] = $this->formField->getName();
-		$this->vars['value'] = $this->model->{$this->columnName};
+		$this->vars['value'] = $this->model->$columnName()->withDeferred($sessionKey)->getNested();
 	}
 
 	/**
@@ -91,14 +94,11 @@ class ItemList extends FormWidgetBase
 
 	public function onCreateItem()
 	{
-		$menu = $this->controller->widget->form->model->exists() ?
-			$this->controller->widget->form->model : new Menu;
-
 		$item = new MenuItem;
 		$item->fill(Request::input());
 		$item->save();
 
-		$menu->items()->add($item, Request::input('_session_key'));
+		$this->model->items()->add($item, Request::input('_session_key'));
 
 		// \Log::info(print_r($_POST, true));
 		$this->prepareVars();
