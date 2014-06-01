@@ -2,6 +2,7 @@
 
 use Backend;
 use System\Classes\PluginBase;
+use System\Classes\PluginManager;
 
 /**
  * Menus Plugin Information File
@@ -47,24 +48,48 @@ class Plugin extends PluginBase
 		];
 	}
 
-	public function register_flynsarmy_menu_item_types()
+	public function registerComponents()
 	{
 		return [
-			'Flynsarmy\\Menu\\MenuItemTypes\\Page' => [
-                'label' => 'Page',
-                'alias' => 'page',
-                'description' => 'A link to a CMS Page'
-            ],
-            'Flynsarmy\\Menu\\MenuItemTypes\\Partial' => [
-                'label' => 'Partial',
-                'alias' => 'partial',
-                'description' => 'A link to a CMS Partial'
-            ],
-            'Flynsarmy\\Menu\\MenuItemTypes\\Link' => [
-                'label' => 'Link',
-                'alias' => 'link',
-                'description' => 'A given URL'
-            ],
+			'\Flynsarmy\Menu\Components\Menu' => 'menu'
 		];
+	}
+
+	public function register_flynsarmy_menu_item_types()
+	{
+		$types = [
+			'Flynsarmy\\Menu\\MenuItemTypes\\Page' => [
+				'label' => 'Page',
+				'alias' => 'page',
+				'description' => 'A link to a CMS Page'
+			],
+			// 'Flynsarmy\\Menu\\MenuItemTypes\\Partial' => [
+			// 	'label' => 'Partial',
+			// 	'alias' => 'partial',
+			// 	'description' => 'A link to a CMS Partial'
+			// ],
+			'Flynsarmy\\Menu\\MenuItemTypes\\Link' => [
+				'label' => 'Link',
+				'alias' => 'link',
+				'description' => 'A given URL'
+			],
+		];
+
+		if ( PluginManager::instance()->hasPlugin('RainLab.Blog') )
+		{
+			$types['Flynsarmy\\Menu\\MenuItemTypes\\BlogPost'] = [
+				'label' => 'Blog Post',
+				'alias' => 'blog_post',
+				'description' => 'A link to a Blog Post',
+			];
+
+			$types['Flynsarmy\\Menu\\MenuItemTypes\\BlogCategory'] = [
+				'label' => 'Blog Category',
+				'alias' => 'blog_category',
+				'description' => 'A link to a Blog Category'
+			];
+		}
+
+		return $types;
 	}
 }

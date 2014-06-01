@@ -9,28 +9,6 @@ class Menu extends Model
 {
 	use \Backend\Traits\ViewMaker;
 
-	protected $default_settings = [
-		'selected_item_matches' => 'id', //'id' or 'class'
-		'selected_item_class' => 'menu-item-selected',
-
-		'depth_prefix' => 'menu-item-level',
-		'depth' => 0,
-
-		'before_menu' => '', //array($id, $name, $short_desc)
-		'after_menu' => '',
-		'before_item' => '<li id="%1$s" class="%2$s">', //array($id, $class)
-		'after_item' => '</li>',
-
-		'before_url_item_label' => '<a href="%1$s" title="%2$s" class="title">', //array($url, $label)
-		'after_url_item_label' => "</a>",
-		'before_nourl_item_label' => '<span class="title">', //array($label)
-		'after_nourl_item_label' => "</span>",
-
-		'always_show_before_after_children' => false,
-		'before_children' => '<ul>',
-		'after_children' => '</ul>',
-	];
-
 	private $firstItem;
 
 	/**
@@ -62,6 +40,33 @@ class Menu extends Model
 		'items' => ['Flynsarmy\Menu\Models\Menuitem']
 	];
 
+	public function getDefaultSettings()
+	{
+		return [
+			'selected_item_matches' => 'id', //'id' or 'class'
+			'selected_item_class' => 'menu-item-selected',
+
+			'has_children_class' => 'menu-item-has-children',
+
+			'depth_prefix' => 'menu-item-level-',
+			'depth' => 0,
+
+			'before_menu' => '<ul class="menu menu-%1$s">', //array($id, $name, $short_desc)
+			'after_menu' => '</ul>', //array($id, $name, $short_desc)
+			'before_item' => '<li id="%1$s" class="menu-item %2$s">', //array($id, $class)
+			'after_item' => '</li>', //array($id, $class)
+
+			'before_url_item_label' => '<a href="%1$s" title="%4$s" class="menu-title">', //array($url, $id, $class, $title)
+			'after_url_item_label' => "</a>", //array($url, $id, $class, $title)
+			'before_nourl_item_label' => '<span class="menu-title">', //array($id, $class, $title)
+			'after_nourl_item_label' => "</span>", //array($id, $class, $title)
+
+			'always_show_before_after_children' => false,
+			'before_children' => '<ul class="menu-children">',
+			'after_children' => '</ul>',
+		];
+	}
+
 	/**
 	 * Returns the last updated topic in this channel.
 	 * @return Model
@@ -77,8 +82,7 @@ class Menu extends Model
 	public function render($overrides = [])
 	{
 		//Provide some default options
-		$settings = array_merge($this->default_settings, $overrides);
-
+		$settings = array_merge($this->getDefaultSettings(), $overrides);
 
 		$form_model = $this;
 		return $this->makePartial('menu', [

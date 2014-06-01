@@ -3,8 +3,7 @@
 use URL;
 use Flynsarmy\Menu\Models\MenuItem;
 use Backend\Widgets\Form;
-use Cms\Classes\Page as Pg;
-use Cms\Classes\Theme;
+use RainLab\Blog\Models\Post;
 use Flynsarmy\Menu\MenuItemTypes\ItemTypeBase;
 
 /**
@@ -14,15 +13,9 @@ use Flynsarmy\Menu\MenuItemTypes\ItemTypeBase;
  * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
-class Page extends ItemTypeBase
+class BlogPost extends ItemTypeBase
 {
-	public $pageList;
-
-	public function __construct()
-	{
-		$theme = Theme::getEditTheme();
-		$this->pageList = Pg::listInTheme($theme, true);
-	}
+	protected $posts = [];
 
 	/**
 	 * Add fields to the MenuItem form
@@ -33,20 +26,24 @@ class Page extends ItemTypeBase
 	 */
 	public function formExtendFields(Form $form)
 	{
-		$context = $form->getContext();
+		if ( !$this->posts )
+		{
+			$posts = Post::isPublished()->select('id', 'title', 'published_at')->orderBy('created_at', 'desc')->get();
+			$options = [];
+			foreach ( $posts as $post )
+				$options[$post->id] = $post->published_at . ' -'.$post->title;
 
-		$options = [];
-		foreach ( $this->pageList as $page )
-			$options[$page->baseFileName] = $page->title . ' ('.$page->url.')';
-
-		asort($options);
+			asort($options);
+			$this->posts = $options;
+		}
 
 		$form->addFields([
 			'master_object_id' => [
-				'label' => 'Page',
-				'comment' => 'Select the page you wish to link to.',
+				'label' => 'Blog Post',
+				'comment' => 'Select the blog post you wish to link to.',
 				'type' => 'dropdown',
-				'options' => $options,
+				'options' => $this->posts,
+				// 'attributes' => ['data-origin' => 'Flynsarmy\Menu\MenuItemTypes\ItemTypeBase'],
 			],
 		]);
 	}
@@ -60,7 +57,7 @@ class Page extends ItemTypeBase
 	 */
 	public function getUrl(MenuItem $item)
 	{
-		return URL::to(Pg::find($item->master_object_id)->url);
+		return URL::to(Post::find($item->master_object_id)->url);
 	}
 
 	/**
@@ -80,6 +77,6 @@ class Page extends ItemTypeBase
 	public function addValidationRules(MenuItem $item)
 	{
 		$item->rules['master_object_id'] = 'required';
-		$item->customMessages['master_object_id.required'] = 'The Page field is required.';
+		$item->customMessages['master_object_id.required'] = 'The Blog Post field is required.';
 	}
 }

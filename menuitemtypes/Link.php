@@ -1,10 +1,17 @@
 <?php namespace Flynsarmy\Menu\MenuItemTypes;
 
-use Backend\Widgets\Form;
 use Flynsarmy\Menu\Models\MenuItem;
+use Backend\Widgets\Form;
+use Flynsarmy\Menu\MenuItemTypes\ItemTypeBase;
 
-
-abstract class ItemTypeBase
+/**
+ * Rich Editor
+ * Renders a rich content editor field.
+ *
+ * @package october\backend
+ * @author Alexey Bobkov, Samuel Georges
+ */
+class Link extends ItemTypeBase
 {
 	/**
 	 * Add fields to the MenuItem form
@@ -15,7 +22,13 @@ abstract class ItemTypeBase
 	 */
 	public function formExtendFields(Form $form)
 	{
-
+		$form->addFields([
+			'url' => [
+				'label' => 'URL',
+				'comment' => 'Enter the URL above.',
+				'type' => 'text',
+			],
+		]);
 	}
 
 	/**
@@ -25,7 +38,10 @@ abstract class ItemTypeBase
 	 *
 	 * @return string
 	 */
-	abstract public function getUrl(MenuItem $item);
+	public function getUrl(MenuItem $item)
+	{
+		return $item->url;
+	}
 
 	/**
 	 * Adds any validation rules to $item->rules array that are required
@@ -41,5 +57,10 @@ abstract class ItemTypeBase
 	 *
 	 * @return void
 	 */
-	public function addValidationRules(MenuItem $item) {}
+	public function addValidationRules(MenuItem $item)
+	{
+		$item->rules['url'] = 'required|url';
+		$item->customMessages['url.required'] = 'The Link field is required.';
+		$item->customMessages['url.url'] = 'The Link field must be a valid URL.';
+	}
 }

@@ -26,7 +26,7 @@ class Menuitem extends Model
 	/**
 	 * @var array Fillable fields
 	 */
-	protected $fillable = ['enabled', 'label', 'title_attrib', 'id_attrib', 'class_attrib', 'url', 'parent_id'];
+	protected $fillable = ['enabled', 'label', 'title_attrib', 'id_attrib', 'class_attrib', 'url', 'master_object_class', 'master_object_id', 'parent_id'];
 
 	public $belongsTo = [
 		'menu' => ['Flynsarmy\Menu\Models\Menu'],
@@ -38,4 +38,37 @@ class Menuitem extends Model
 	public $rules = [
 		'label' => 'required'
 	];
+
+	public function getUrl()
+	{
+		return $this->url;
+	}
+
+	/**
+	 * Generates a class attribute based on the menu settings and item position
+	 *
+	 * @param  array  $settings
+	 * @param  int    $depth
+	 *
+	 * @return string
+	 */
+	public function getClassAttrib( array $settings, $depth )
+	{
+		$classes = [];
+		if ( $this->class_attrib )
+			$classes = explode(' ', $this->class_attrib);
+
+		if ( is_int($depth) )
+			$classes[] = $settings['depth_prefix'].$depth;
+
+		if ( $this->getChildren()->count() )
+			$classes[] = $settings['has_children_class'];
+
+		if ( !empty($settings['selected_item']) )
+			if ( $settings['selected_item_matches'] == 'id' && $settings['selected_item'] == $$this->id_attrib ||
+				 $settings['selected_item_matches'] == 'class' && in_array($settings['selected_item'], $classes) )
+				$classes[] = $options['selected_item_class'];
+
+		return implode(' ', $classes);
+	}
 }

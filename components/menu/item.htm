@@ -1,0 +1,23 @@
+{{ before_item|format(item.id_attrib|e, item.getClassAttrib(settings, depth)|e)|raw }}
+	{% if url %}
+		{{ before_url_item_label|format(url, item.id_attrib|e, item.class_attrib|e, item.title_attrib|e)|raw }}
+	{% else %}
+		{{ before_nourl_item_label|format(item.id_attrib, item.class_attrib, item.title_attrib)|raw }}
+	{% endif %}
+		{{ item.label }}
+	{% if url %}
+		{{ after_url_item_label|format(url, item.id_attrib|e, item.class_attrib|e, item.title_attrib|e)|raw }}
+	{% else %}
+		{{ after_nourl_item_label|format(item.id_attrib|e, item.class_attrib|e, item.title_attrib|e)|raw }}
+	{% endif %}
+
+	{% if child_count or always_show_before_after_children %}
+		{{ before_children|raw }}
+	{% endif %}
+		{% for child in item.getChildren() %}
+			{% partial __SELF__~"::item" item=child depth=depth+1 url=child.getUrl() child_count=child.children.count() %}
+		{% endfor %}
+	{% if child_count or always_show_before_after_children %}
+		{{ after_children|raw }}
+	{% endif %}
+{{ after_item|format(item.id_attrib|e, item.getClassAttrib(settings, depth)|e)|raw }}

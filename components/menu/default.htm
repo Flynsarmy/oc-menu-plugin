@@ -1,0 +1,5 @@
+{{ before_menu|format(menu.id, menu.name|e, menu.short_desc|e)|raw }}
+	{% for item in menu.items().getNested() %}
+		{% partial __SELF__~"::item" item=item url=item.getUrl() child_count=item.getChildren().count() %}
+	{% endfor %}
+{{ after_menu|format(menu.id, menu.name|e, menu.short_desc|e)|raw }}

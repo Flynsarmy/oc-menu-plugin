@@ -6,33 +6,37 @@ use October\Rain\Database\Updates\Migration;
 class CreateMenuitemsTable extends Migration
 {
 
-    public function up()
-    {
-        Schema::create('flynsarmy_menu_menuitems', function($table)
-        {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->integer('menu_id')->unsigned()->index();
-            $table->boolean('enabled')->index();
-            $table->string('label')->default('');
-            $table->string('title_attrib')->default('');
-            $table->string('id_attrib')->default('');
-            $table->string('class_attrib')->default('');
-            $table->string('url')->default('');
+	public function up()
+	{
+		Schema::create('flynsarmy_menu_menuitems', function($table)
+		{
+			$table->engine = 'InnoDB';
+			$table->increments('id');
+			$table->integer('menu_id')->default(0)->unsigned()->index();
+			$table->boolean('enabled')->default(false)->index();
+			$table->string('label')->default('');
+			$table->string('title_attrib')->default('');
+			$table->string('id_attrib')->default('');
+			$table->string('class_attrib')->default('');
+			$table->string('url')->default('');
 
-            // Nesting
-            $table->integer('parent_id')->unsigned()->index();
-            $table->integer('nest_left');
-            $table->integer('nest_right');
-            $table->integer('nest_depth');
+			// Master objects
+			$table->string('master_object_class')->default('');
+			$table->string('master_object_id')->default('');
 
-            $table->timestamps();
-        });
-    }
+			// Nesting
+			$table->integer('parent_id')->default(0)->unsigned()->index();
+			$table->integer('nest_left')->default(0);
+			$table->integer('nest_right')->default(0);
+			$table->integer('nest_depth')->default(0);
 
-    public function down()
-    {
-        Schema::drop('flynsarmy_menu_menuitems');
-    }
+			$table->timestamps();
+		});
+	}
+
+	public function down()
+	{
+		Schema::drop('flynsarmy_menu_menuitems');
+	}
 
 }
