@@ -20,7 +20,7 @@ class Link extends ItemTypeBase
 	 *
 	 * @return void
 	 */
-	public function formExtendFields(Form $form)
+	public function extendItemForm(Form $form)
 	{
 		$form->addFields([
 			'url' => [
@@ -29,18 +29,6 @@ class Link extends ItemTypeBase
 				'type' => 'text',
 			],
 		]);
-	}
-
-	/**
-	 * Returns the URL for the master object of given ID
-	 *
-	 * @param  MenuItem  $item Master object iD
-	 *
-	 * @return string
-	 */
-	public function getUrl(MenuItem $item)
-	{
-		return $item->url;
 	}
 
 	/**
@@ -57,10 +45,22 @@ class Link extends ItemTypeBase
 	 *
 	 * @return void
 	 */
-	public function addValidationRules(MenuItem $item)
+	public function extendItemModel(MenuItem $item)
 	{
 		$item->rules['url'] = 'required|url';
 		$item->customMessages['url.required'] = 'The Link field is required.';
 		$item->customMessages['url.url'] = 'The Link field must be a valid URL.';
+	}
+
+	/**
+	 * Returns the URL for the master object of given ID
+	 *
+	 * @param  MenuItem  $item Master object iD
+	 *
+	 * @return string
+	 */
+	public function getUrl(MenuItem $item)
+	{
+		return $item->url;
 	}
 }

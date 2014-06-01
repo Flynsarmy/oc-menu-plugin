@@ -79,7 +79,7 @@ class ItemList extends FormWidgetBase
 
 			$form->bindEvent('form.extendFields', function($widget) use ($type){
 				$itemTypeObj = new $type;
-				$itemTypeObj->formExtendFields($widget);
+				$itemTypeObj->extendItemForm($widget);
 			});
 
 			$this->vars['form'] = $form;
@@ -101,7 +101,7 @@ class ItemList extends FormWidgetBase
 		if ( class_exists($master_object_class) )
 		{
 			$itemTypeObj = new $master_object_class;
-			$itemTypeObj->addValidationRules($item);
+			$itemTypeObj->extendItemModel($item);
 			if ( $item->validate() )
 				$item->url = $itemTypeObj->getUrl($item);
 		}

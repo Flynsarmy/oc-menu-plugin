@@ -3,9 +3,8 @@
 use URL;
 use Flynsarmy\Menu\Models\MenuItem;
 use Backend\Widgets\Form;
-use Cms\Classes\Page as Pg;
-use Cms\Classes\Theme;
 use Flynsarmy\Menu\MenuItemTypes\ItemTypeBase;
+use Flynsarmy\Menu\Classes\DropDownHelper;
 
 /**
  * Rich Editor
@@ -16,14 +15,6 @@ use Flynsarmy\Menu\MenuItemTypes\ItemTypeBase;
  */
 class Page extends ItemTypeBase
 {
-	public $pageList;
-
-	public function __construct()
-	{
-		$theme = Theme::getEditTheme();
-		$this->pageList = Pg::listInTheme($theme, true);
-	}
-
 	/**
 	 * Add fields to the MenuItem form
 	 *
@@ -31,36 +22,16 @@ class Page extends ItemTypeBase
 	 *
 	 * @return void
 	 */
-	public function formExtendFields(Form $form)
+	public function extendItemForm(Form $form)
 	{
-		$context = $form->getContext();
-
-		$options = [];
-		foreach ( $this->pageList as $page )
-			$options[$page->baseFileName] = $page->title . ' ('.$page->url.')';
-
-		asort($options);
-
 		$form->addFields([
 			'master_object_id' => [
 				'label' => 'Page',
 				'comment' => 'Select the page you wish to link to.',
 				'type' => 'dropdown',
-				'options' => $options,
+				'options' => DropDownHelper::instance()->pages(),
 			],
 		]);
-	}
-
-	/**
-	 * Returns the URL for the master object of given ID
-	 *
-	 * @param  MenuItem  $item Master object iD
-	 *
-	 * @return string
-	 */
-	public function getUrl(MenuItem $item)
-	{
-		return URL::to(Pg::find($item->master_object_id)->url);
 	}
 
 	/**
@@ -77,9 +48,21 @@ class Page extends ItemTypeBase
 	 *
 	 * @return void
 	 */
-	public function addValidationRules(MenuItem $item)
+	public function extendItemModel(MenuItem $item)
 	{
 		$item->rules['master_object_id'] = 'required';
 		$item->customMessages['master_object_id.required'] = 'The Page field is required.';
+	}
+
+	/**
+	 * Returns the URL for the master object of given ID
+	 *
+	 * @param  MenuItem  $item Master object iD
+	 *
+	 * @return string
+	 */
+	public function getUrl(MenuItem $item)
+	{
+		return URL::to(Pg::find($item->master_object_id)->url);
 	}
 }

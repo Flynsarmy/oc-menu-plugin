@@ -3,7 +3,7 @@
 use URL;
 use Flynsarmy\Menu\Models\MenuItem;
 use Backend\Widgets\Form;
-use RainLab\Blog\Models\Post;
+use RainLab\Blog\Models\Category;
 use Flynsarmy\Menu\MenuItemTypes\ItemTypeBase;
 use Flynsarmy\Menu\Models\Settings;
 use Flynsarmy\Menu\Classes\DropDownHelper;
@@ -16,9 +16,9 @@ use System\Classes\ApplicationException;
  * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
  */
-class BlogPost extends ItemTypeBase
+class BlogCategory extends ItemTypeBase
 {
-	protected $posts = [];
+	protected $categories = [];
 
 	/**
 	 * Add fields to the MenuItem form
@@ -29,23 +29,18 @@ class BlogPost extends ItemTypeBase
 	 */
 	public function extendItemForm(Form $form)
 	{
-		if ( !$this->posts )
+		if ( !$this->categories )
 		{
-			$posts = Post::isPublished()->select('id', 'title', 'published_at')->orderBy('created_at', 'desc')->get();
-			$options = [];
-			foreach ( $posts as $post )
-				$options[$post->id] = date('M j Y H:i', strtotime($post->published_at)) . ' - '.$post->title;
-
-			asort($options);
-			$this->posts = $options;
+			$categories = Category::select('id', 'name')->orderBy('name')->lists('name', 'id');
+			$this->categories = $categories;
 		}
 
 		$form->addFields([
 			'master_object_id' => [
-				'label' => 'Blog Post',
-				'comment' => 'Select the blog post you wish to link to. Remember to set the Blog Posts Page option on the Menu Settings page!',
+				'label' => 'Blog Category',
+				'comment' => 'Select the blog category you wish to link to. Remember to set the Blog Categories Page option on the Menu Settings page!',
 				'type' => 'dropdown',
-				'options' => $this->posts,
+				'options' => $this->categories,
 			],
 		]);
 	}
@@ -80,10 +75,10 @@ class BlogPost extends ItemTypeBase
 	public function extendSettingsForm(Form $form)
 	{
 		$form->addFields([
-			'blog_post_page' => [
+			'blog_category_page' => [
 				'tab' => 'Blog',
-				'label' => 'Blog Post Page',
-				'comment' => 'Select the page your blog posts are displayed on',
+				'label' => 'Blog Category Page',
+				'comment' => 'Select the page your blog categories are displayed on',
 				'type' => 'dropdown',
 				'options' => DropDownHelper::instance()->pages(),
 			],
@@ -106,9 +101,10 @@ class BlogPost extends ItemTypeBase
 	 */
 	public function extendSettingsModel(Settings $settings)
 	{
-		$item->rules['blog_post_page'] = 'required';
-		$item->customMessages['blog_post_page.required'] = 'The Blog Post Page field is required.';
+		$item->rules['blog_category_page'] = 'required';
+		$item->customMessages['blog_category_page.required'] = 'The Blog Category Page field is required.';
 	}
+
 
 	/**
 	 * Returns the URL for the master object of given ID
@@ -119,12 +115,12 @@ class BlogPost extends ItemTypeBase
 	 */
 	public function getUrl(MenuItem $item)
 	{
-		$page_url = Settings::get('blog_post_page', 'blog/post');
-		$post = Post::find($item->master_object_id);
+		$page_url = Settings::get('blog_category_page', 'blog/category');
+		$category = Category::find($item->master_object_id);
 
-		if ( !$post )
-			throw new ApplicationException("Post not found.");
+		if ( !$category )
+			throw new ApplicationException("Category not found.");
 
-		return URL::to($page_url.'/'.$post->slug);
+		return URL::to($page_url.'/'.$category->slug);
 	}
 }

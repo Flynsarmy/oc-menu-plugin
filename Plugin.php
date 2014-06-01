@@ -42,6 +42,12 @@ class Plugin extends PluginBase
 						'url'         => Backend::url('flynsarmy/menu/menus'),
 						'permissions' => ['flynsarmy.menu:access_menus'],
 					],
+					'settings' => [
+						'label'       => 'Settings',
+						'icon'        => 'icon-cog',
+						'url'         => Backend::url('flynsarmy/menu/settings'),
+						'permissions' => ['flynsarmy.menu:access_menu_settings'],
+					],
 				]
 
 			]

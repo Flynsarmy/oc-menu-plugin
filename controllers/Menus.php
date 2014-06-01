@@ -2,7 +2,6 @@
 
 use BackendMenu;
 use Backend\Classes\Controller;
-use Flynsarmy\Menu\Models\Menu;
 
 /**
  * Channels Back-end Controller
