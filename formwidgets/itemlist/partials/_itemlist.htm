@@ -1,6 +1,5 @@
 <?= $this->makePartial('toolbar') ?>
 
-<?php if ( $value->count() ): ?>
 	<p><br/>Drag and nest the menu items using the icons on the left. Click a menu item to edit it.</p>
 
 	<div
@@ -10,13 +9,16 @@
 		data-handle="a.move"
 		data-stripe-load-indicator>
 		<ol id="reorderRecords">
-			<?= $this->makePartial('item_records', ['records' => $value]) ?>
+			<?php
+				if ( $value->count() ):
+					$this->makePartial('item_records', ['records' => $value]);
+				else:
+					?><li>There are no items yet.</li>
+			<?php
+				endif;
+			?>
 		</ol>
 	</div>
-<?php else: ?>
-
-<?php endif; ?>
-
 <script>
 
 	/*
