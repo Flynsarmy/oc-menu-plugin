@@ -3,6 +3,7 @@
 use URL;
 use Flynsarmy\Menu\Models\MenuItem;
 use Backend\Widgets\Form;
+use Cms\Classes\Page as Pg;
 use Flynsarmy\Menu\MenuItemTypes\ItemTypeBase;
 use Flynsarmy\Menu\Classes\DropDownHelper;
 

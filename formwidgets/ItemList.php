@@ -67,7 +67,7 @@ class ItemList extends FormWidgetBase
 
 			$this->vars['type'] = $type;
 			$itemTypes = MenuManager::instance()->listItemTypes();
-			$this->vars['itemType'] = $itemTypes[$type];
+			$this->vars['typeInfo'] = $itemTypes[$type];
 
 			/*
 			 * Create a form widget to render the form
@@ -115,6 +115,40 @@ class ItemList extends FormWidgetBase
 		return [
 			'#reorderRecords' => $this->makePartial('item_records', ['records' => $this->vars['value']])
 		];
+	}
+
+	public function onLoadEditItem()
+	{
+		try {
+			$id = post('id', 0);
+			if (!$item = MenuItem::find($id))
+				throw new Exception('Menu item not found.');
+
+			$this->vars['type'] = $type = $item->master_object_class;
+			$itemTypes = MenuManager::instance()->listItemTypes();
+			$this->vars['typeInfo'] = $itemTypes[$type];
+
+			/*
+			 * Create a form widget to render the form
+			 */
+			$config = $this->makeConfig('@/plugins/flynsarmy/menu/models/menuitem/fields.yaml');
+			$config->model = $item;
+			$config->context = 'edit';
+			$form = $this->makeWidget('Backend\Widgets\Form', $config);
+
+			$form->bindEvent('form.extendFields', function($widget) use ($type){
+				$itemTypeObj = new $type;
+				$itemTypeObj->extendItemForm($widget);
+			});
+
+			$this->vars['form'] = $form;
+
+		}
+		catch (Exception $ex) {
+			$this->vars['fatalError'] = $ex->getMessage();
+		}
+
+		return $this->makePartial('update_item');
 	}
 
 	public function onMove()

@@ -1,18 +1,18 @@
 <?php if (!isset($fatalError)): ?>
-	<form data-request="<?= $this->getEventHandler('onCreateItem') ?>" data-request-success="$el.closest('.modal').modal('hide');" data-stripe-load-indicator>
+	<form data-request="<?= $this->getEventHandler('onUpdateItem') ?>" data-request-success="$el.closest('.modal').modal('hide');" data-stripe-load-indicator>
 
 		<input type="hidden" name="master_object_class" value="<?= $type ?>" />
 
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			<h4 class="modal-title" id="chooseTypeLabel">New <?= $typeInfo['label'] ?></h4>
+			<h4 class="modal-title" id="chooseTypeLabel">Edit <?= $typeInfo['label'] ?></h4>
 		</div>
 		<div class="modal-body">
 			<?= $form->render() ?>
 		</div>
 		<div class="modal-footer">
 			<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-			<button type="submit" class="btn btn-primary oc-icon-plus" onclick="$(this).setCreateFormSessionKey();">Add Item</button>
+			<button type="submit" class="btn btn-primary oc-icon-tick" onclick="$(this).setCreateFormSessionKey();">Update Item</button>
 		</div>
 
 	</form>
