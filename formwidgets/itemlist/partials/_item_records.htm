@@ -1,8 +1,15 @@
 <?php foreach ($records as $record): ?>
-	<li data-record-id="<?= $record->id ?>">
+	<li data-record-id="<?= $record->id ?>" class='item <?= $itemTypes[$record->master_object_class]['alias'] ?>'>
 		<div class="record">
 			<a href="javascript:;" class="move"></a>
-			<span><a href="#" data-control="popup" data-handler="<?= $this->getEventHandler('onLoadEditItem') ?>" data-request-data="id: '<?= $record->id ?>'"><?= $record->label ?></a></span>
+			<span><a href="#" data-control="popup" data-handler="<?= $this->getEventHandler('onLoadEditItem') ?>" data-request-data="id: '<?= $record->id ?>'">
+				<?= $record->label ?> (<?= $record->url ?>)
+			</a></span>
+
+			<span class="fright">
+				<?= $itemTypes[$record->master_object_class]['label'] ?>
+				<a href="#" data-request="<?= $this->getEventHandler('onRemoveItem') ?>" data-request-confirm="Are you sure you wish to remove this item?" data-request-data="id: '<?= $record->id ?>'" class='trash'><i class='icon-trash-o'></i></a>
+			</span>
 		</div>
 
 		<ol>

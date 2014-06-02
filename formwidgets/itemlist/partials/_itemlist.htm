@@ -1,15 +1,21 @@
 <?= $this->makePartial('toolbar') ?>
 
-<div
-	id="itemTreeList"
-	class="control-treelist"
-	data-control="treelist"
-	data-handle="a.move"
-	data-stripe-load-indicator>
-	<ol id="reorderRecords">
-		<?= $this->makePartial('item_records', ['records' => $value]) ?>
-	</ol>
-</div>
+<?php if ( $value->count() ): ?>
+	<p><br/>Drag and nest the menu items using the icons on the left. Click a menu item to edit it.</p>
+
+	<div
+		id="itemTreeList"
+		class="control-treelist"
+		data-control="treelist"
+		data-handle="a.move"
+		data-stripe-load-indicator>
+		<ol id="reorderRecords">
+			<?= $this->makePartial('item_records', ['records' => $value]) ?>
+		</ol>
+	</div>
+<?php else: ?>
+
+<?php endif; ?>
 
 <script>
 

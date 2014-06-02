@@ -38,8 +38,7 @@ class ItemList extends FormWidgetBase
 		$sessionKey = $this->controller->widget->formItems->sessionKey;
 		$columnName = $this->columnName;
 
-		$this->vars['stretch'] = $this->formField->stretch;
-		$this->vars['size'] = $this->formField->size;
+		$this->vars['itemTypes'] = MenuManager::instance()->listItemTypes();
 		$this->vars['name'] = $this->formField->getName();
 		$this->vars['value'] = $this->model->$columnName()->withDeferred($sessionKey)->getNested();
 	}
@@ -170,6 +169,20 @@ class ItemList extends FormWidgetBase
 		}
 
 		$item->save();
+
+		$this->prepareVars();
+		return [
+			'#reorderRecords' => $this->makePartial('item_records', ['records' => $this->vars['value']])
+		];
+	}
+
+	public function onRemoveItem()
+	{
+		$id = post('id', 0);
+		if (!$item = MenuItem::find($id))
+			throw new Exception('Menu item not found.');
+
+		$item->delete();
 
 		$this->prepareVars();
 		return [

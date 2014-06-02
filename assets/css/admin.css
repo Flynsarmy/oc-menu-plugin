@@ -1,5 +1,6 @@
 /* october.css has .control-toolbar{font-size:0} to fix white space issues. This breaks modals, so present a working size */
 .modal .modal-content {font-size:12px;}
+.fright {float:right;}
 
 .selectable_list {padding-left:0;}
 .selectable_list li {list-style:none;padding:5px 10px;border-bottom:1px solid #e1e1e8;}
@@ -7,3 +8,10 @@
 .selectable_list label {cursor:pointer;}
 .selectable_list span {display:block;}
 .selectable_list span.description {font-weight:normal;}
+
+#itemTreeList .trash {margin-left:5px;}
+#itemTreeList .item a.move:before {content:"\f0ac";} /* fa-globe */
+#itemTreeList .item.page a.move:before {content:"\f1c5";} /* fa-file-photo-o */
+#itemTreeList .item.link a.move:before {content:"\f0c1";} /* fa-file-link */
+#itemTreeList .item.blog_post a.move:before {content:"\f040";} /* fa-pencil */
+#itemTreeList .item.blog_category a.move:before {content:"\f115";} /* fa-folder-open-o */
