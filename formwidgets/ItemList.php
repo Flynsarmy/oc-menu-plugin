@@ -124,6 +124,7 @@ class ItemList extends FormWidgetBase
 			if (!$item = MenuItem::find($id))
 				throw new Exception('Menu item not found.');
 
+			$this->vars['id'] = $id;
 			$this->vars['type'] = $type = $item->master_object_class;
 			$itemTypes = MenuManager::instance()->listItemTypes();
 			$this->vars['typeInfo'] = $itemTypes[$type];
@@ -149,6 +150,31 @@ class ItemList extends FormWidgetBase
 		}
 
 		return $this->makePartial('update_item');
+	}
+
+	public function onEditItem()
+	{
+		$id = post('id', 0);
+		if (!$item = MenuItem::find($id))
+			throw new Exception('Menu item not found.');
+
+		$item->fill(Request::input());
+
+		$master_object_class = Request::input('master_object_class');
+		if ( class_exists($master_object_class) )
+		{
+			$itemTypeObj = new $master_object_class;
+			$itemTypeObj->extendItemModel($item);
+			if ( $item->validate() )
+				$item->url = $itemTypeObj->getUrl($item);
+		}
+
+		$item->save();
+
+		$this->prepareVars();
+		return [
+			'#reorderRecords' => $this->makePartial('item_records', ['records' => $this->vars['value']])
+		];
 	}
 
 	public function onMove()
