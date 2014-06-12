@@ -1,23 +1,24 @@
 <?= $this->makePartial('toolbar') ?>
 
 	<p><br/>Drag and nest the menu items using the icons on the left. Click a menu item to edit it.</p>
-
-	<div
-		id="itemTreeList"
-		class="control-treelist"
-		data-control="treelist"
-		data-handle="a.move"
-		data-stripe-load-indicator>
-		<ol id="reorderRecords">
-			<?php
-				if ( $value->count() ):
-					echo $this->makePartial('item_records', ['records' => $value]);
-				else:
-					?><li>There are no items yet.</li>
-			<?php
-				endif;
-			?>
-		</ol>
+	<div class="form-preview">
+		<div
+			id="itemTreeList"
+			class="control-treelist"
+			data-control="treelist"
+			data-handle="a.move"
+			data-stripe-load-indicator>
+			<ol id="reorderRecords">
+				<?php
+					if ( $value->count() ):
+						echo $this->makePartial('item_records', ['records' => $value]);
+					else:
+						?><li>There are no items yet.</li>
+				<?php
+					endif;
+				?>
+			</ol>
+		</div>
 	</div>
 <script>
 
