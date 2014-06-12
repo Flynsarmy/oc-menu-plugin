@@ -11,7 +11,7 @@
 		<ol id="reorderRecords">
 			<?php
 				if ( $value->count() ):
-					$this->makePartial('item_records', ['records' => $value]);
+					echo $this->makePartial('item_records', ['records' => $value]);
 				else:
 					?><li>There are no items yet.</li>
 			<?php

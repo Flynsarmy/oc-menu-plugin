@@ -40,7 +40,7 @@ class ItemList extends FormWidgetBase
 
 		$this->vars['itemTypes'] = MenuManager::instance()->listItemTypes();
 		$this->vars['name'] = $this->formField->getName();
-		$this->vars['value'] = $this->model->$columnName()->withDeferred($sessionKey)->getNested();
+		$this->vars['value'] = $this->model->$columnName()->withDeferred($sessionKey)->get();
 	}
 
 	/**
