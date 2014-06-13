@@ -1,6 +1,7 @@
 <?php namespace Flynsarmy\Menu\Models;
 
 use Model;
+use Flynsarmy\Menu\Models\Menu;
 
 //http://laravel.io/bin/XLN52#
 //http://octobercms.com/docs/database/model#deferred-binding
@@ -70,5 +71,10 @@ class Menuitem extends Model
 				$classes[] = $options['selected_item_class'];
 
 		return implode(' ', $classes);
+	}
+
+	public function render( array $settings, $depth=0, $url, $child_count=0 )
+	{
+		return require __DIR__.'/../partials/_menuitem.php';
 	}
 }

@@ -7,8 +7,6 @@ use Model;
  */
 class Menu extends Model
 {
-	use \Backend\Traits\ViewMaker;
-
 	private $firstItem;
 
 	/**
@@ -84,10 +82,6 @@ class Menu extends Model
 		//Provide some default options
 		$settings = array_merge($this->getDefaultSettings(), $overrides);
 
-		$form_model = $this;
-		return $this->makePartial('menu', [
-			'menu' => $this,
-			'settings' => $settings,
-		]);
+		return require __DIR__.'/../partials/_menu.php';
 	}
 }

@@ -150,11 +150,13 @@ class Menu extends ComponentBase
 			$settings[$key] = $this->property($key, $setting);
 		$settings['menu'] = $menu;
 
-		foreach ( $settings as $key => $setting )
-			$this->page[$key] = $setting;
+		// foreach ( $settings as $key => $setting )
+		// 	$this->page[$key] = $setting;
 
-		// This is an ugly and memory intensive hack required to get around
-		// Controller not having a getVars() method.
-		$this->page['settings'] = $settings;
+		// // This is an ugly and memory intensive hack required to get around
+		// // Controller not having a getVars() method.
+		// $this->page['settings'] = $settings;
+
+		return $menu->render($settings);
 	}
 }
