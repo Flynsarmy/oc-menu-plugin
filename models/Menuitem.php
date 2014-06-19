@@ -12,12 +12,14 @@ use Flynsarmy\Menu\Models\Menu;
  */
 class Menuitem extends Model
 {
+	use \October\Rain\Database\Traits\NestedTree;
+
 	/**
 	 * @var string The database table used by the model.
 	 */
 	public $table = 'flynsarmy_menu_menuitems';
 
-	public $implement = ['October.Rain.Database.Behaviors.NestedSetModel'];
+	// public $implement = ['October.Rain.Database.Behaviors.NestedSetModel'];
 
 	/**
 	 * @var array Guarded fields
