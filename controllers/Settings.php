@@ -20,6 +20,8 @@ class Settings extends Controller
 
 	public $pageTitle = 'Settings';
 
+	public $requiredPermissions = ['flynsarmy.menu.access_menu_settings'];
+
 	public function __construct()
 	{
 		parent::__construct();
