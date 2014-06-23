@@ -164,12 +164,6 @@ class MenuManager
 		if (isset($aliases[$name]))
 			return $aliases[$name];
 
-		dd($aliases);
-
-		$_name = Str::normalizeClassName($name);
-		if (isset($this->itemTypes[$_name]))
-			return $_name;
-
 		return null;
 	}
 }

@@ -1,14 +1,19 @@
 <?php namespace Flynsarmy\Menu\MenuItemTypes;
 
-use URL;
+use Cms\Classes\Controller;
+use Cms\Classes\Theme;
 use Flynsarmy\Menu\Models\MenuItem;
 use Backend\Widgets\Form;
-use Cms\Classes\Page as Pg;
+use Cms\Classes\Partial as Prtl;
 use Flynsarmy\Menu\MenuItemTypes\ItemTypeBase;
 use Flynsarmy\Menu\Classes\DropDownHelper;
 
-class Page extends ItemTypeBase
+class Partial extends ItemTypeBase
 {
+	// use \Backend\Traits\ViewMaker {
+ //        ViewMaker::makeFileContents as localMakeFileContents;
+ //    }
+
 	/**
 	 * Add fields to the MenuItem form
 	 *
@@ -20,10 +25,10 @@ class Page extends ItemTypeBase
 	{
 		$form->addFields([
 			'master_object_id' => [
-				'label' => 'Page',
-				'comment' => 'Select the page you wish to link to.',
+				'label' => 'Partial',
+				'comment' => 'Select the partial you wish to render.',
 				'type' => 'dropdown',
-				'options' => DropDownHelper::instance()->pages(),
+				'options' => DropDownHelper::instance()->partials(),
 			],
 		]);
 	}
@@ -45,7 +50,7 @@ class Page extends ItemTypeBase
 	public function extendItemModel(MenuItem $item)
 	{
 		$item->rules['master_object_id'] = 'required';
-		$item->customMessages['master_object_id.required'] = 'The Page field is required.';
+		$item->customMessages['master_object_id.required'] = 'The Partial field is required.';
 	}
 
 	/**
@@ -57,6 +62,29 @@ class Page extends ItemTypeBase
 	 */
 	public function getUrl(MenuItem $item)
 	{
-		return URL::to(Pg::find($item->master_object_id)->url);
+		return '';
+	}
+
+	/**
+	 * Outputs custom markup in place of the default URL. If not specified,
+	 * URL is output.
+	 *
+	 * @param  MenuItem $item
+	 *
+	 * @return string
+	 */
+	public function onRender(MenuItem $item, array $settings, $depth=0, $url, $child_count=0)
+	{
+		$theme = Theme::getEditTheme();
+		$controller = new Controller($theme);
+		$controller->initTwigEnvironment();
+
+		return $controller->renderPartial($item->master_object_id, [
+			'item' => $item,
+			'settings' => $settings,
+			'depth' => $depth,
+			'url' => $url,
+			'child_count' => $child_count,
+		]);
 	}
 }

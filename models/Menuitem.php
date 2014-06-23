@@ -77,6 +77,14 @@ class Menuitem extends Model
 
 	public function render( array $settings, $depth=0, $url, $child_count=0 )
 	{
+		// Support custom itemType-specific output
+		if ( class_exists($this->master_object_class) )
+		{
+			$itemTypeObj = new $this->master_object_class;
+			if ( $output = $itemTypeObj->onRender($this, $settings, $depth, $url, $child_count) )
+				return $output;
+		}
+
 		return require __DIR__.'/../partials/_menuitem.php';
 	}
 }

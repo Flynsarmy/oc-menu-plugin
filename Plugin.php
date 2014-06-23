@@ -40,17 +40,25 @@ class Plugin extends PluginBase
 						'label'       => 'All Menus',
 						'icon'        => 'icon-bars',
 						'url'         => Backend::url('flynsarmy/menu/menus'),
-						'permissions' => ['flynsarmy.menu:access_menus'],
+						'permissions' => ['flynsarmy.menu.access_menus'],
 					],
 					'settings' => [
 						'label'       => 'Settings',
 						'icon'        => 'icon-cog',
 						'url'         => Backend::url('flynsarmy/menu/settings'),
-						'permissions' => ['flynsarmy.menu:access_menu_settings'],
+						'permissions' => ['flynsarmy.menu.access_menu_settings'],
 					],
 				]
 
 			]
+		];
+	}
+
+	public function registerPermissions()
+	{
+		return [
+			'flynsarmy.menu.access_menus'          => ['label' => 'Menus - Access Menus', 'tab' => 'Flynsarmy'],
+			'flynsarmy.menu.access_menu_settings'  => ['label' => 'Menus - Access Settings', 'tab' => 'Flynsarmy'],
 		];
 	}
 
@@ -69,11 +77,11 @@ class Plugin extends PluginBase
 				'alias' => 'page',
 				'description' => 'A link to a CMS Page'
 			],
-			// 'Flynsarmy\\Menu\\MenuItemTypes\\Partial' => [
-			// 	'label' => 'Partial',
-			// 	'alias' => 'partial',
-			// 	'description' => 'A link to a CMS Partial'
-			// ],
+			'Flynsarmy\\Menu\\MenuItemTypes\\Partial' => [
+				'label' => 'Partial',
+				'alias' => 'partial',
+				'description' => 'Render a CMS Partial'
+			],
 			'Flynsarmy\\Menu\\MenuItemTypes\\Link' => [
 				'label' => 'Link',
 				'alias' => 'link',

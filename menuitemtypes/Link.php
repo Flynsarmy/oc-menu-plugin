@@ -4,13 +4,6 @@ use Flynsarmy\Menu\Models\MenuItem;
 use Backend\Widgets\Form;
 use Flynsarmy\Menu\MenuItemTypes\ItemTypeBase;
 
-/**
- * Rich Editor
- * Renders a rich content editor field.
- *
- * @package october\backend
- * @author Alexey Bobkov, Samuel Georges
- */
 class Link extends ItemTypeBase
 {
 	/**

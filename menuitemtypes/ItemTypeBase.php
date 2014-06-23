@@ -65,4 +65,18 @@ abstract class ItemTypeBase
 	 * @return string
 	 */
 	abstract public function getUrl(MenuItem $item);
+
+	/**
+	 * Outputs custom markup in place of the default URL. If not specified,
+	 * URL is output.
+	 *
+	 * @param  MenuItem $item
+	 * @param  array    $settings
+	 * @param  integer  $depth
+	 * @param  [type]   $url
+	 * @param  integer  $child_count
+	 *
+	 * @return string
+	 */
+	public function onRender(MenuItem $item, array $settings, $depth=0, $url, $child_count=0) {}
 }

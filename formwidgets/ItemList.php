@@ -96,10 +96,9 @@ class ItemList extends FormWidgetBase
 		$item = new MenuItem;
 		$item->fill(Request::input());
 
-		$master_object_class = Request::input('master_object_class');
-		if ( class_exists($master_object_class) )
+		if ( class_exists($item->master_object_class) )
 		{
-			$itemTypeObj = new $master_object_class;
+			$itemTypeObj = new $item->master_object_class;
 			$itemTypeObj->extendItemModel($item);
 			if ( $item->validate() )
 				$item->url = $itemTypeObj->getUrl($item);

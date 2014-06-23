@@ -19,4 +19,6 @@
 	if ( $child_count || $settings['always_show_before_after_children'] )
 		$output .= sprintf($settings['after_children']);
 
+	$output .= sprintf($settings['after_item'], $this->id_attrib, $this->getClassAttrib($settings, $depth));
+
 	return $output;

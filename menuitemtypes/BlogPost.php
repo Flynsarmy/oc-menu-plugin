@@ -9,13 +9,6 @@ use Flynsarmy\Menu\Models\Settings;
 use Flynsarmy\Menu\Classes\DropDownHelper;
 use System\Classes\ApplicationException;
 
-/**
- * Rich Editor
- * Renders a rich content editor field.
- *
- * @package october\backend
- * @author Alexey Bobkov, Samuel Georges
- */
 class BlogPost extends ItemTypeBase
 {
 	protected $posts = [];

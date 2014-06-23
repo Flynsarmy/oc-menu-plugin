@@ -7,6 +7,7 @@ fields:
     label: Enabled?
     type: checkbox
     comment: Disabled menu items and their children won't appear in the menu
+    default: true
 
   id_attrib:
     label: ID Attribute
