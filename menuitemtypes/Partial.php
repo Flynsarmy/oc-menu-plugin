@@ -84,6 +84,8 @@ class Partial extends ItemTypeBase
 			'depth' => $depth,
 			'url' => $url,
 			'child_count' => $child_count,
+			'before_item' => sprintf($settings['before_item'], $item->id, $item->id_attrib, $item->getClassAttrib($settings, $depth), $item->title_attrib),
+			'after_item' => sprintf($settings['after_item'], $item->id, $item->id_attrib, $item->getClassAttrib($settings, $depth), $item->title_attrib),
 		]);
 	}
 }

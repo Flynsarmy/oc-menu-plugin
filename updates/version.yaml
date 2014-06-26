@@ -2,3 +2,5 @@
     - Plugin Initialization
     - create_menus_table.php
     - create_menuitems_table.php
+1.0.2:
+    - Add before_item and after_item helpers for Partial item type
