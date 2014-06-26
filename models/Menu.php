@@ -22,7 +22,7 @@ class Menu extends Model
 	/**
 	 * @var array Fillable fields
 	 */
-	protected $fillable = ['name', 'short_desc'];
+	protected $fillable = ['name', 'short_desc', 'id_attrib', 'class_attrib'];
 
 	/**
 	 * @var array Validation rules
