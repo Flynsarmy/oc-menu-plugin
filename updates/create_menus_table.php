@@ -13,6 +13,8 @@ class CreateMenusTable extends Migration
 			$table->engine = 'InnoDB';
 			$table->increments('id');
 			$table->string('name')->default('');
+			$table->string('id_attrib')->default('');
+			$table->string('class_attrib')->default('');
 			$table->string('short_desc')->default('');
 			$table->timestamps();
 		});

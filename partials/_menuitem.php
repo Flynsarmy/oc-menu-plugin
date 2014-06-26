@@ -1,14 +1,14 @@
 <?php
-	$output = sprintf($settings['before_item'], $this->id_attrib, $this->getClassAttrib($settings, $depth));
+	$output = sprintf($settings['before_item'], $this->id, $this->id_attrib, $this->getClassAttrib($settings, $depth), $this->title_attrib);
 	$output .= $url ?
-			sprintf($settings['before_url_item_label'], $url, $this->id_attrib, $this->class_attrib, $this->title_attrib) : //<a href="%1$s" title="%2$s" class="title">
-			sprintf($settings['before_nourl_item_label'], $this->id_attrib, $this->class_attrib, $this->title_attrib); //<span class="title">
+			sprintf($settings['before_url_item_label'], $url, $this->id, $this->id_attrib, $this->getClassAttrib($settings, $depth), $depth, $this->title_attrib) : //<a href="%1$s" title="%2$s" class="title">
+			sprintf($settings['before_nourl_item_label'], $this->id, $this->id_attrib, $this->getClassAttrib($settings, $depth), $depth, $this->title_attrib); //<span class="title">
 
 		$output .= htmlspecialchars($this->label);
 
 	$output .= $url ?
-		sprintf($settings['after_url_item_label'], $url, $this->id_attrib, $this->class_attrib, $this->title_attrib) : //<a href="%1$s" title="%2$s" class="title">
-		sprintf($settings['after_nourl_item_label'], $this->id_attrib, $this->class_attrib, $this->title_attrib); //<span class="title">
+		sprintf($settings['after_url_item_label'], $url, $this->id, $this->id_attrib, $this->getClassAttrib($settings, $depth), $depth, $this->title_attrib) : //<a href="%1$s" title="%2$s" class="title">
+		sprintf($settings['after_nourl_item_label'], $this->id, $this->id_attrib, $this->getClassAttrib($settings, $depth), $depth, $this->title_attrib); //<span class="title">
 
 	if ( $child_count || $settings['always_show_before_after_children'] )
 		$output .= sprintf($settings['before_children']);
@@ -19,6 +19,6 @@
 	if ( $child_count || $settings['always_show_before_after_children'] )
 		$output .= sprintf($settings['after_children']);
 
-	$output .= sprintf($settings['after_item'], $this->id_attrib, $this->getClassAttrib($settings, $depth));
+	$output .= sprintf($settings['after_item'], $this->id, $this->id_attrib, $this->getClassAttrib($settings, $depth), $this->title_attrib);
 
 	return $output;

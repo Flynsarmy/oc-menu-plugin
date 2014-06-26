@@ -77,7 +77,6 @@ class Partial extends ItemTypeBase
 	{
 		$theme = Theme::getEditTheme();
 		$controller = new Controller($theme);
-		$controller->initTwigEnvironment();
 
 		return $controller->renderPartial($item->master_object_id, [
 			'item' => $item,

@@ -29,7 +29,7 @@ class Menuitem extends Model
 	/**
 	 * @var array Fillable fields
 	 */
-	protected $fillable = ['enabled', 'label', 'title_attrib', 'id_attrib', 'class_attrib', 'url', 'master_object_class', 'master_object_id', 'parent_id'];
+	protected $fillable = ['enabled', 'label', 'title_attrib', 'id_attrib', 'class_attrib', 'selected_item_id', 'url', 'master_object_class', 'master_object_id', 'parent_id'];
 
 	public $belongsTo = [
 		'menu' => ['Flynsarmy\Menu\Models\Menu'],
@@ -41,6 +41,8 @@ class Menuitem extends Model
 	public $rules = [
 		'label' => 'required'
 	];
+
+	protected $cache = [];
 
 	public function getUrl()
 	{
@@ -57,6 +59,9 @@ class Menuitem extends Model
 	 */
 	public function getClassAttrib( array $settings, $depth )
 	{
+		if ( !empty($this->cache['classAttrib']) )
+			return $this->cache['classAttrib'];
+
 		$classes = [];
 		if ( $this->class_attrib )
 			$classes = explode(' ', $this->class_attrib);
@@ -67,12 +72,10 @@ class Menuitem extends Model
 		if ( $this->getChildren()->count() )
 			$classes[] = $settings['has_children_class'];
 
-		if ( !empty($settings['selected_item']) )
-			if ( $settings['selected_item_matches'] == 'id' && $settings['selected_item'] == $$this->id_attrib ||
-				 $settings['selected_item_matches'] == 'class' && in_array($settings['selected_item'], $classes) )
-				$classes[] = $options['selected_item_class'];
+		if ( !empty($settings['selected_item']) && $settings['selected_item'] == $this->selected_item_id )
+			$classes[] = $settings['selected_item_class'];
 
-		return implode(' ', $classes);
+		return $this->cache['classAttrib'] = implode(' ', $classes);
 	}
 
 	public function render( array $settings, $depth=0, $url, $child_count=0 )

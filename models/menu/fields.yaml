@@ -5,14 +5,24 @@
 tabs:
   fields:
     name:
-        label: Name
-        tab: Details
+      label: Name
+      tab: Details
+
+    id_attrib:
+      label: ID Attribute
+      span: left
+      tab: Details
+
+    class_attrib:
+      label: Class Attribute
+      span: right
+      tab: Details
 
     short_desc:
-        label: Short Description
-        tab: Details
+      label: Short Description
+      tab: Details
 
     items:
-        type: Flynsarmy\Menu\FormWidgets\ItemList
-        size: huge
-        tab: Fields
+      type: Flynsarmy\Menu\FormWidgets\ItemList
+      size: huge
+      tab: Fields

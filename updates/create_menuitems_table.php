@@ -18,6 +18,7 @@ class CreateMenuitemsTable extends Migration
 			$table->string('title_attrib')->default('');
 			$table->string('id_attrib')->default('');
 			$table->string('class_attrib')->default('');
+			$table->string('selected_item_id')->default('');
 			$table->string('url')->default('');
 
 			// Master objects

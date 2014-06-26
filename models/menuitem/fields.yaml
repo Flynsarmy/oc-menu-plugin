@@ -9,6 +9,10 @@ fields:
     comment: Disabled menu items and their children won't appear in the menu
     default: true
 
+  selected_item_id:
+    label: Selected Item ID
+    comment: This value is compared against the 'selected_item' value passed to your menu. If a match is found, the 'selected_item_class' class is appended to this item.
+
   id_attrib:
     label: ID Attribute
     span: left

@@ -41,7 +41,6 @@ class Menu extends Model
 	public function getDefaultSettings()
 	{
 		return [
-			'selected_item_matches' => 'id', //'id' or 'class'
 			'selected_item_class' => 'menu-item-selected',
 
 			'has_children_class' => 'menu-item-has-children',
@@ -49,15 +48,15 @@ class Menu extends Model
 			'depth_prefix' => 'menu-item-level-',
 			'depth' => 0,
 
-			'before_menu' => '<ul class="menu menu-%1$s">', //array($id, $name, $short_desc)
-			'after_menu' => '</ul>', //array($id, $name, $short_desc)
-			'before_item' => '<li id="%1$s" class="menu-item %2$s">', //array($id, $class)
-			'after_item' => '</li>', //array($id, $class)
+			'before_menu' => '<ul id="%3$s" class="menu menu-%1$s %4$s">', //array($id, $name, $id_attrib, $class_attrib, $short_desc)
+			'after_menu' => '</ul>', //array($id, $name, $id_attrib, $class_attrib, $short_desc)
+			'before_item' => '<li id="%2$s" class="menu-item menu-item-%1$s %3$s">', //array($id, $id_attrib, $class_attrib, $depth, $title)
+			'after_item' => '</li>', //array($id, $id_attrib, $class_attrib, $depth, $title)
 
-			'before_url_item_label' => '<a href="%1$s" title="%4$s" class="menu-title">', //array($url, $id, $class, $title)
-			'after_url_item_label' => "</a>", //array($url, $id, $class, $title)
-			'before_nourl_item_label' => '<span class="menu-title">', //array($id, $class, $title)
-			'after_nourl_item_label' => "</span>", //array($id, $class, $title)
+			'before_url_item_label' => '<a href="%1$s" title="%4$s" class="menu-title">', //array($url, $id, $id_attrib, $class_attrib, $depth, $title)
+			'after_url_item_label' => "</a>", //array($url, $id, $id_attrib, $class_attrib, $depth, $title)
+			'before_nourl_item_label' => '<span class="menu-title">', //array($id, $id_attrib, $class_attrib, $depth, $title)
+			'after_nourl_item_label' => "</span>", //array($id, $id_attrib, $class_attrib, $depth, $title)
 
 			'always_show_before_after_children' => false,
 			'before_children' => '<ul class="menu-children">',
