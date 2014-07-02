@@ -1,6 +1,7 @@
 <?php namespace Flynsarmy\Menu\Models;
 
 use Model;
+use Cms\Classes\Controller;
 use Flynsarmy\Menu\Models\Menu;
 
 //http://laravel.io/bin/XLN52#
@@ -78,13 +79,13 @@ class Menuitem extends Model
 		return $this->cache['classAttrib'] = implode(' ', $classes);
 	}
 
-	public function render( array $settings, $depth=0, $url, $child_count=0 )
+	public function render( Controller $controller, array $settings, $depth=0, $url, $child_count=0 )
 	{
 		// Support custom itemType-specific output
 		if ( class_exists($this->master_object_class) )
 		{
 			$itemTypeObj = new $this->master_object_class;
-			if ( $output = $itemTypeObj->onRender($this, $settings, $depth, $url, $child_count) )
+			if ( $output = $itemTypeObj->onRender($this, $controller, $settings, $depth, $url, $child_count) )
 				return $output;
 		}
 

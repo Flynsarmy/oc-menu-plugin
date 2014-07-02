@@ -73,10 +73,9 @@ class Partial extends ItemTypeBase
 	 *
 	 * @return string
 	 */
-	public function onRender(MenuItem $item, array $settings, $depth=0, $url, $child_count=0)
+	public function onRender(MenuItem $item, Controller $controller, array $settings, $depth=0, $url, $child_count=0)
 	{
 		$theme = Theme::getEditTheme();
-		$controller = new Controller($theme);
 
 		return $controller->renderPartial($item->master_object_id, [
 			'item' => $item,

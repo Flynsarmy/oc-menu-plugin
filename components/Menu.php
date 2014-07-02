@@ -57,6 +57,6 @@ class Menu extends ComponentBase
 		// // Controller not having a getVars() method.
 		// $this->page['settings'] = $settings;
 
-		return $menu->render($settings);
+		return $menu->render($this->controller, $settings);
 	}
 }

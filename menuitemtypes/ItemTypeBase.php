@@ -1,6 +1,7 @@
 <?php namespace Flynsarmy\Menu\MenuItemTypes;
 
 use Backend\Widgets\Form;
+use Cms\Classes\Controller;
 use Flynsarmy\Menu\Models\MenuItem;
 use Flynsarmy\Menu\Models\Settings;
 
@@ -70,13 +71,14 @@ abstract class ItemTypeBase
 	 * Outputs custom markup in place of the default URL. If not specified,
 	 * URL is output.
 	 *
-	 * @param  MenuItem $item
-	 * @param  array    $settings
-	 * @param  integer  $depth
-	 * @param  [type]   $url
-	 * @param  integer  $child_count
+	 * @param  MenuItem   $item
+	 * @param  Controller $controller
+	 * @param  array      $settings
+	 * @param  integer    $depth
+	 * @param  [type]     $url
+	 * @param  integer    $child_count
 	 *
 	 * @return string
 	 */
-	public function onRender(MenuItem $item, array $settings, $depth=0, $url, $child_count=0) {}
+	public function onRender(MenuItem $item, Controller $controller, array $settings, $depth=0, $url, $child_count=0) {}
 }

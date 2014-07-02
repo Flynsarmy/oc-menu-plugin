@@ -1,6 +1,7 @@
 <?php namespace Flynsarmy\Menu\Models;
 
 use Model;
+use Cms\Classes\Controller;
 
 /**
  * Menu Model
@@ -76,7 +77,7 @@ class Menu extends Model
 		return $this->firstItem = $this->items()->first();
 	}
 
-	public function render($overrides = [])
+	public function render(Controller $controller, $overrides = [])
 	{
 		//Provide some default options
 		$settings = array_merge($this->getDefaultSettings(), $overrides);
