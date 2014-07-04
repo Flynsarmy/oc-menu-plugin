@@ -76,9 +76,9 @@ class ItemList extends FormWidgetBase
 			$config->context = 'create';
 			$form = $this->makeWidget('Backend\Widgets\Form', $config);
 
-			$form->bindEvent('form.extendFields', function($widget) use ($type){
+			$form->bindEvent('form.extendFields', function() use ($type, $form){
 				$itemTypeObj = new $type;
-				$itemTypeObj->extendItemForm($widget);
+				$itemTypeObj->extendItemForm($form);
 			});
 
 			$this->vars['form'] = $form;
@@ -135,9 +135,9 @@ class ItemList extends FormWidgetBase
 			$config->context = 'edit';
 			$form = $this->makeWidget('Backend\Widgets\Form', $config);
 
-			$form->bindEvent('form.extendFields', function($widget) use ($type){
+			$form->bindEvent('form.extendFields', function() use ($type, $form){
 				$itemTypeObj = new $type;
-				$itemTypeObj->extendItemForm($widget);
+				$itemTypeObj->extendItemForm($form);
 			});
 
 			$this->vars['form'] = $form;
