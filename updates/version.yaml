@@ -6,3 +6,5 @@
     - Add before_item and after_item helpers for Partial item type
 1.0.3:
     - Pass the current controller to menus and items so page/layout components apply
+1.0.4:
+    - Event binding fixes
