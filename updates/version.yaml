@@ -8,3 +8,5 @@
     - Pass the current controller to menus and items so page/layout components apply
 1.0.4:
     - Event binding fixes
+1.0.5:
+    - Validation compatibility fix for October v117
