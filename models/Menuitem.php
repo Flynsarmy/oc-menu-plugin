@@ -13,6 +13,7 @@ use Flynsarmy\Menu\Models\Menu;
  */
 class Menuitem extends Model
 {
+	use \October\Rain\Database\Traits\Validation;
 	use \October\Rain\Database\Traits\NestedTree;
 
 	/**
@@ -42,6 +43,8 @@ class Menuitem extends Model
 	public $rules = [
 		'label' => 'required'
 	];
+
+	public $customMessages = [];
 
 	protected $cache = [];
 

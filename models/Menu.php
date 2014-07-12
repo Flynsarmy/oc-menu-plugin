@@ -8,6 +8,8 @@ use Cms\Classes\Controller;
  */
 class Menu extends Model
 {
+	use \October\Rain\Database\Traits\Validation;
+
 	private $firstItem;
 
 	/**
