@@ -2,13 +2,6 @@
 .modal .modal-content {font-size:12px;}
 .fright {float:right;}
 
-.selectable_list {padding-left:0;}
-.selectable_list li {list-style:none;padding:5px 10px;border-bottom:1px solid #e1e1e8;}
-.selectable_list li:hover {background:#428bca;color:white;cursor:pointer;}
-.selectable_list label {cursor:pointer;}
-.selectable_list span {display:block;}
-.selectable_list span.description {font-weight:normal;}
-
 #itemTreeList .trash {margin-left:5px;}
 #itemTreeList .item a.move:before {content:"\f0ac";} /* fa-globe */
 #itemTreeList .item.page a.move:before {content:"\f0c5";} /* icon-copy */

@@ -4,18 +4,22 @@
 </div>
 <div class="modal-body">
 
-	<ul class='selectable_list'>
-		<?php foreach ( $item_types as $class => $details ): ?>
-			<li data-dismiss="modal" data-control="popup" data-handler="onLoadCreateItem" data-request-data="type_id: '<?= $details['alias'] ?>'">
-				<label>
-					<span class='title'><?= $details['label'] ?></span>
-					<?php if ( !empty($details['description']) ): ?>
-						<span class='description'><?= $details['description'] ?></span>
-					<?php endif; ?>
-				</label>
-			</li>
-		<?php endforeach; ?>
-	</ul>
+	<div class='list-preview'>
+		<div class="control-simplelist is-selectable is-scrollable size-large" data-control="simplelist">
+			<ul>
+				<?php foreach ( $item_types as $class => $details ): ?>
+					<li data-dismiss="modal" data-control="popup" data-handler="onLoadCreateItem" data-request-data="type_id: '<?= $details['alias'] ?>'">
+						<a>
+							<h5 class='heading'><?= $details['label'] ?></h5>
+							<?php if ( !empty($details['description']) ): ?>
+								<p class='description'><?= $details['description'] ?></p>
+							<?php endif; ?>
+						</a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	</div>
 
 </div>
 <div class="modal-footer">

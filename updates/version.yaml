@@ -10,3 +10,5 @@
     - Event binding fixes
 1.0.5:
     - Validation compatibility fix for October v117
+1.0.6:
+    - Use October styles for item type selection list
