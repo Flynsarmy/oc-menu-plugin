@@ -14,7 +14,7 @@
 		$output .= sprintf($settings['before_children']);
 
 		foreach ( $this->getChildren() as $child )
-			$output .= $child->render($settings, ++$depth, $child->getUrl(), $child->children->count());
+			$output .= $child->render($controller, $settings, ++$depth, $child->getUrl(), $child->children->count());
 
 	if ( $child_count || $settings['always_show_before_after_children'] )
 		$output .= sprintf($settings['after_children']);
