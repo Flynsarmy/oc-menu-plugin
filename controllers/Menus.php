@@ -26,13 +26,4 @@ class Menus extends Controller
 		BackendMenu::setContext('Flynsarmy.Menu', 'menu', 'menus');
 		$this->addCss('/plugins/flynsarmy/menu/assets/css/admin.css');
 	}
-
-	/**
-	 * Called after the form model is deleted.
-	 * @param Model
-	 */
-	public function formAfterDelete(Menu $model)
-	{
-		$model->items()->delete();
-	}
 }

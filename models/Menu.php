@@ -41,6 +41,15 @@ class Menu extends Model
 		'items' => ['Flynsarmy\Menu\Models\Menuitem']
 	];
 
+	/**
+	 * Remove menu items on delete
+	 */
+	public function beforeDelete()
+	{
+		foreach ($this->items as $item)
+			$item->delete();
+	}
+
 	public function getDefaultSettings()
 	{
 		return [

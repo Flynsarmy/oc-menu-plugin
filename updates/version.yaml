@@ -8,3 +8,4 @@
 1.0.5: Validation compatibility fix for October v117
 1.0.6: Use October styles for item type selection list
 1.0.7: Fix nesting issue
+1.0.8: Delete menu items when deleting menus. Minor UI improvements
