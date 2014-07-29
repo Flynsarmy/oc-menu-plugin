@@ -2,15 +2,9 @@
     - Plugin Initialization
     - create_menus_table.php
     - create_menuitems_table.php
-1.0.2:
-    - Add before_item and after_item helpers for Partial item type
-1.0.3:
-    - Pass the current controller to menus and items so page/layout components apply
-1.0.4:
-    - Event binding fixes
-1.0.5:
-    - Validation compatibility fix for October v117
-1.0.6:
-    - Use October styles for item type selection list
-1.0.7:
-    - Fix nesting issue
+1.0.2: Add before_item and after_item helpers for Partial item type
+1.0.3: Pass the current controller to menus and items so page/layout components apply
+1.0.4: Event binding fixes
+1.0.5: Validation compatibility fix for October v117
+1.0.6: Use October styles for item type selection list
+1.0.7: Fix nesting issue

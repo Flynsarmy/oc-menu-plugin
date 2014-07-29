@@ -1,5 +1,5 @@
 <?php if (!isset($fatalError)): ?>
-	<form data-request="<?= $this->getEventHandler('onEditItem') ?>" data-request-success="$el.closest('.modal').modal('hide');" data-stripe-load-indicator>
+	<form data-request="<?= $this->getEventHandler('onEditItem') ?>" data-request-success="$el.closest('.modal').modal('hide');" data-popup-load-indicator>
 
 		<input type="hidden" name="master_object_class" value="<?= $type ?>" />
 		<input type="hidden" name="id" value="<?= $id ?>" />
