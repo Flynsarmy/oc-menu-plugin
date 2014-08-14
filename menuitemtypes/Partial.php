@@ -30,7 +30,7 @@ class Partial extends ItemTypeBase
 				'type' => 'dropdown',
 				'options' => DropDownHelper::instance()->partials(),
 			],
-		]);
+		], 'primary');
 	}
 
 	/**

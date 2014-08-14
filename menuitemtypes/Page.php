@@ -24,8 +24,9 @@ class Page extends ItemTypeBase
 				'comment' => 'Select the page you wish to link to.',
 				'type' => 'dropdown',
 				'options' => DropDownHelper::instance()->pages(),
+				'tab' => 'Item',
 			],
-		]);
+		], 'primary');
 	}
 
 	/**

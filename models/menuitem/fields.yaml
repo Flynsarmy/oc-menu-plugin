@@ -2,30 +2,47 @@
 #  Form Field Definitions
 # ===================================
 
-fields:
-  enabled:
-    label: Enabled?
-    type: checkbox
-    comment: Disabled menu items and their children won't appear in the menu
-    default: true
+tabs:
+  fields:
+    enabled:
+      label: Enabled?
+      type: checkbox
+      comment: Disabled menu items and their children won't appear in the menu
+      default: true
+      tab: Item
 
-  selected_item_id:
-    label: Selected Item ID
-    comment: This value is compared against the 'selected_item' value passed to your menu. If a match is found, the 'selected_item_class' class is appended to this item.
+    selected_item_id:
+      label: Selected Item ID
+      comment: This value is compared against the 'selected_item' value passed to your menu. If a match is found, the 'selected_item_class' class is appended to this item.
+      tab: Item
 
-  id_attrib:
-    label: ID Attribute
-    span: left
+    label:
+      label: Navigation Label
+      tab: Item
 
-  class_attrib:
-    label: Class Attribute
-    span: right
+    id_attrib:
+      label: ID Attribute
+      span: left
+      tab: Attributes
 
-  label:
-    label: Navigation Label
-    span: left
+    class_attrib:
+      label: Class Attribute
+      span: right
+      tab: Attributes
 
-  title_attrib:
-    label: Title Attribute
-    span: right
+    target_attrib:
+      label: Target Attribute
+      span: left
+      type: dropdown
+      comment: See w3schools for more information http://www.w3schools.com/tags/att_a_target.asp
+      options:
+        _self: Default
+        _blank: Blank
+        _parent: Parent
+        _top: Top
+      tab: Attributes
 
+    title_attrib:
+      label: Title Attribute
+      span: right
+      tab: Attributes

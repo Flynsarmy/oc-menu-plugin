@@ -34,8 +34,9 @@ class BlogCategory extends ItemTypeBase
 				'comment' => 'Select the blog category you wish to link to. Remember to set the Blog Categories Page option on the Menu Settings page!',
 				'type' => 'dropdown',
 				'options' => $this->categories,
+				'tab' => 'Item',
 			],
-		]);
+		], 'primary');
 	}
 
 	/**

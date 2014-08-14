@@ -20,8 +20,9 @@ class Link extends ItemTypeBase
 				'label' => 'URL',
 				'comment' => 'Enter the URL above.',
 				'type' => 'text',
+				'tab' => 'Item',
 			],
-		]);
+		], 'primary');
 	}
 
 	/**

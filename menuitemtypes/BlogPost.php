@@ -39,8 +39,9 @@ class BlogPost extends ItemTypeBase
 				'comment' => 'Select the blog post you wish to link to. Remember to set the Blog Posts Page option on the Menu Settings page!',
 				'type' => 'dropdown',
 				'options' => $this->posts,
+				'tab' => 'Item',
 			],
-		]);
+		], 'primary');
 	}
 
 	/**
