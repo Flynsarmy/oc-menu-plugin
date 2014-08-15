@@ -65,7 +65,7 @@ class Menu extends Model
 			'before_item' => '<li id="%2$s" class="menu-item menu-item-%1$s %3$s">', //array($id, $id_attrib, $class_attrib, $depth, $title)
 			'after_item' => '</li>', //array($id, $id_attrib, $class_attrib, $depth, $title)
 
-			'before_url_item_label' => '<a href="%1$s" title="%6$s" class="menu-title", target="%7$s">', //array($url, $id, $id_attrib, $class_attrib, $depth, $title, $target)
+			'before_url_item_label' => '<a href="%1$s" title="%6$s" class="menu-title" target="%7$s">', //array($url, $id, $id_attrib, $class_attrib, $depth, $title, $target)
 			'after_url_item_label' => "</a>", //array($url, $id, $id_attrib, $class_attrib, $depth, $title)
 			'before_nourl_item_label' => '<span class="menu-title">', //array($id, $id_attrib, $class_attrib, $depth, $title)
 			'after_nourl_item_label' => "</span>", //array($id, $id_attrib, $class_attrib, $depth, $title)
