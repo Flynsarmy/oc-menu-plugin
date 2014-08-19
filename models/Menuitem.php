@@ -46,6 +46,11 @@ class Menuitem extends Model
 
 	protected $jsonable = ['data'];
 
+	/**
+	 * @var array Translatable fields
+	 */
+	public $translatable = ['label', 'title_attrib'];
+
 	public $customMessages = [];
 
 	protected $cache = [];
@@ -53,6 +58,26 @@ class Menuitem extends Model
 	public function getUrl()
 	{
 		return $this->url;
+	}
+
+	/**
+	 * Add translation support to this model, if available.
+	 * @return void
+	 */
+	public static function boot()
+	{
+		// Call default functionality (required)
+		parent::boot();
+
+		// Check the translate plugin is installed
+		if ( !class_exists('RainLab\Translate\Behaviors\TranslatableModel') )
+			return;
+
+		// Extend the constructor of the model
+		self::extend(function($model) {
+			// Implement the translatable behavior
+			$model->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
+		});
 	}
 
 	/**
