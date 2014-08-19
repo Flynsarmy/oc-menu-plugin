@@ -26,6 +26,13 @@ class Page extends ItemTypeBase
 				'options' => DropDownHelper::instance()->pages(),
 				'tab' => 'Item',
 			],
+			'data[params]' => [
+				'label' => 'Slug Parameters',
+				'comment' => 'If a slug uses a parameter such as :slug, enter a value for it here. Enter valid JSON - for example {"slug":"my-page-slug"}',
+				'type' => 'text',
+				'options' => DropDownHelper::instance()->pages(),
+				'tab' => 'Item',
+			],
 		], 'primary');
 	}
 
@@ -58,6 +65,10 @@ class Page extends ItemTypeBase
 	 */
 	public function getUrl(MenuItem $item)
 	{
-		return URL::to(Pg::find($item->master_object_id)->url);
+		$params = [];
+		if ( !empty($item->data['params']) )
+			$params = (array)json_decode($item->data['params']);
+
+		return Pg::url(Pg::find($item->master_object_id)->fileName, $params);
 	}
 }

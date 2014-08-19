@@ -13,3 +13,6 @@
     - Add link target attribute, improved UI
     - add_menuitem_target_field.php
 1.0.10: Remove comma in item links
+1.0.11:
+    - Add page slug parameters option
+    - add_menuitem_data_field.php
