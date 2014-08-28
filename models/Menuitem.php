@@ -64,21 +64,21 @@ class Menuitem extends Model
 	 * Add translation support to this model, if available.
 	 * @return void
 	 */
-	public static function boot()
-	{
-		// Call default functionality (required)
-		parent::boot();
+	// public static function boot()
+	// {
+	// 	// Call default functionality (required)
+	// 	parent::boot();
 
-		// Check the translate plugin is installed
-		if ( !class_exists('RainLab\Translate\Behaviors\TranslatableModel') )
-			return;
+	// 	// Check the translate plugin is installed
+	// 	if ( !class_exists('RainLab\Translate\Behaviors\TranslatableModel') )
+	// 		return;
 
-		// Extend the constructor of the model
-		self::extend(function($model) {
-			// Implement the translatable behavior
-			$model->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
-		});
-	}
+	// 	// Extend the constructor of the model
+	// 	self::extend(function($model) {
+	// 		// Implement the translatable behavior
+	// 		$model->implement[] = 'RainLab.Translate.Behaviors.TranslatableModel';
+	// 	});
+	// }
 
 	/**
 	 * Generates a class attribute based on the menu settings and item position

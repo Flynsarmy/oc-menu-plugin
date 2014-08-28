@@ -14,5 +14,5 @@
     - add_menuitem_target_field.php
 1.0.10: Remove comma in item links
 1.0.11:
-    - Add slug parameters option for Page items, translation support
+    - Add slug parameters option for Page items
     - add_menuitem_data_field.php
