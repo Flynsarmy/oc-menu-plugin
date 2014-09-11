@@ -70,6 +70,6 @@ class Page extends ItemTypeBase
 		if ( !empty($item->data['params']) )
 			$params = (array)json_decode($item->data['params']);
 
-		return Pg::url(Pg::find($item->master_object_id)->fileName, $params, $absolute));
+		return Pg::url(Pg::find($item->master_object_id)->fileName, $params, $absolute);
 	}
 }

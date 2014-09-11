@@ -31,7 +31,7 @@ class Menuitem extends Model
 	/**
 	 * @var array Fillable fields
 	 */
-	protected $fillable = ['enabled', 'label', 'title_attrib', 'id_attrib', 'class_attrib', 'target_attrib', 'selected_item_id', 'url', 'data', 'master_object_class', 'master_object_id', 'parent_id'];
+	protected $fillable = ['enabled', 'label', 'title_attrib', 'id_attrib', 'class_attrib', 'target_attrib','is_absolute', 'selected_item_id', 'url', 'data', 'master_object_class', 'master_object_id', 'parent_id'];
 
 	public $belongsTo = [
 		'menu' => ['Flynsarmy\Menu\Models\Menu'],
