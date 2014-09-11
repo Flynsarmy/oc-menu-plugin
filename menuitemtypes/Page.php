@@ -66,9 +66,10 @@ class Page extends ItemTypeBase
 	public function getUrl(MenuItem $item)
 	{
 		$params = [];
+		$absolute = ($item->attributes['is_absolute']*1 == 1)?true:false;
 		if ( !empty($item->data['params']) )
 			$params = (array)json_decode($item->data['params']);
 
-		return Pg::url(Pg::find($item->master_object_id)->fileName, $params);
+		return Pg::url(Pg::find($item->master_object_id)->fileName, $params, $absolute));
 	}
 }
