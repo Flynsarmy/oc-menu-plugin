@@ -27,12 +27,23 @@ class Page extends ItemTypeBase
 				'tab' => 'Item',
 			],
 			'data[params]' => [
-				'label' => 'Slug Parameters',
-				'comment' => 'If a slug uses a parameter such as :slug, enter a value for it here. Enter valid JSON - for example {"slug":"my-page-slug"}',
+				'label' => 'Slug Parameters / String parameters',
+				'comment' => 'If a slug uses a parameter such as :slug, enter a value for it here. Enter valid JSON - for example {"slug":"my-page-slug"}. If not valid JSON will be provided - the parameters string will be added as suffix to the url',
 				'type' => 'text',
 				'options' => DropDownHelper::instance()->pages(),
 				'tab' => 'Item',
 			],
+            'is_absolute' => [
+              'label'=> 'Absolute/Relative?',
+              'span'=> 'left',
+              'type'=> 'dropdown',
+              'comment'=> 'How to build the link, to make it relative or absolute',
+              'options'=> [
+                    0 => 'Relative',
+                    1 => 'Absolute'
+                ],
+              'tab'=> 'Attributes'
+            ]
 		], 'primary');
 	}
 
@@ -66,9 +77,10 @@ class Page extends ItemTypeBase
 	public function getUrl(MenuItem $item)
 	{
 		$params = [];
+		$absolute = ($item->attributes['is_absolute']*1 == 1)?true:false;
 		if ( !empty($item->data['params']) )
 			$params = (array)json_decode($item->data['params']);
 
-		return Pg::url(Pg::find($item->master_object_id)->fileName, $params);
+		return Pg::url(Pg::find($item->master_object_id)->fileName, $params, $absolute);
 	}
 }
