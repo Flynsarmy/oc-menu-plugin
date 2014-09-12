@@ -27,8 +27,8 @@ class Page extends ItemTypeBase
 				'tab' => 'Item',
 			],
 			'data[params]' => [
-				'label' => 'Slug Parameters',
-				'comment' => 'If a slug uses a parameter such as :slug, enter a value for it here. Enter valid JSON - for example {"slug":"my-page-slug"}',
+				'label' => 'Slug Parameters / String parameters',
+				'comment' => 'If a slug uses a parameter such as :slug, enter a value for it here. Enter valid JSON - for example {"slug":"my-page-slug"}. If not valid JSON will be provided - the parameters string will be added as suffix to the url',
 				'type' => 'text',
 				'options' => DropDownHelper::instance()->pages(),
 				'tab' => 'Item',
