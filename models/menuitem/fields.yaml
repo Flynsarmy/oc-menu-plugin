@@ -42,16 +42,6 @@ tabs:
         _top: Top
       tab: Attributes
 
-    is_absolute:
-      label: Is absolute path
-      span: left
-      type: dropdown
-      comment: How to build the like, to make it relative or absolute
-      options:
-        0: Relative
-        1: Absolute
-      tab: Attributes
-
     title_attrib:
       label: Title Attribute
       span: right

@@ -33,6 +33,17 @@ class Page extends ItemTypeBase
 				'options' => DropDownHelper::instance()->pages(),
 				'tab' => 'Item',
 			],
+            'is_absolute' => [
+              'label'=> 'Absolute/Relative?',
+              'span'=> 'left',
+              'type'=> 'dropdown',
+              'comment'=> 'How to build the link, to make it relative or absolute',
+              'options'=> [
+                    0 => 'Relative',
+                    1 => 'Absolute'
+                ],
+              'tab'=> 'Attributes'
+            ]
 		], 'primary');
 	}
 
