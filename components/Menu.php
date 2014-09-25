@@ -1,14 +1,10 @@
 <?php namespace Flynsarmy\Menu\Components;
 
-use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
 use Validator;
 use Cms\Classes\ComponentBase;
 use October\Rain\Support\ValidationException;
 use Flynsarmy\Menu\Models\Menu as MenuModel;
-use Flynsarmy\Menu\Models\Menuitem;
 use System\Classes\ApplicationException;
-use Cms\Classes\Controller;
-
 
 class Menu extends ComponentBase
 {
@@ -46,10 +42,9 @@ class Menu extends ComponentBase
 	 */
 	public function onRender()
 	{
-		//$menu = MenuModel::find($this->property('menu_id', 0));
 		$menu = MenuModel::with('items')->where('id', '=', $this->property('menu_id', 0))->get();
 
-        foreach($menu as $singlemenu) // there is only one of these... but eager loading seems to make me do this
+        foreach($menu as $singlemenu) // there is only one menu... but eager loading seems to make me do a loop
             $this->menuTree= $this->buildTree($singlemenu, $this->controller);
     }
 
@@ -57,6 +52,16 @@ class Menu extends ComponentBase
      * Using eager loading and creating my menuTree here uses way less database queries.
      * The same thing could easily be done in the twig template using methods like getEagerChildren(), but this queries
      *      the database more.
+     *
+     * This essentially creates a hierarchical order of the items in the menu.  Something like:
+     *  returned array
+     *      0 = Menuitem {object}
+     *          children = {array}
+     *              0 = Menuitem {object}
+     *              1 = Menuitem {object}
+     *              2 = etc...
+     *      1 = Menuitem {object}
+     *      2 = etc...
      *
      * @param $items
      * @param int $parentId
