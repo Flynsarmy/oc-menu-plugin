@@ -3,21 +3,25 @@
 {% macro render_menu(links) %}
     {% for code, link in links %}
         <li class=" {{ link.sublinks ? 'dropdown' }} {{ code == currentPage ? 'active' }}">
-            <a href="{{ link.children ? '#' : (link.page)|page }}"
-               {% if link.children %}data-toggle="dropdown"{% endif %}
-               class="{{ link.children ? 'dropdown-toggle' }}"
-                    >
-                {% if link.getAttributes().icon %}
-                    <i class="fa {{ link.getAttributes().icon ? link.getAttributes().icon :
-                    (menu.getAttributes().default_icon ? menu.getAttributes().default_icon) }}"></i>
+            {% if link.render %}
+                {{ link.render|raw }}
+            {% else %}
+                <a href="{{ link.children ? '#' : (link.page)|page }}"
+                   {% if link.children %}data-toggle="dropdown"{% endif %}
+                   class="{{ link.children ? 'dropdown-toggle' }}"
+                        >
+                    {% if link.getAttributes().icon %}
+                        <i class="fa {{ link.getAttributes().icon ? link.getAttributes().icon :
+                        (menu.getAttributes().default_icon ? menu.getAttributes().default_icon) }}"></i>
+                    {% endif %}
+                    <span>{{ link.getAttributes().label }}</span>
+                    {% if link.children %}<span class="caret"></span>{% endif %}
+                </a>
+                {% if link.children %}
+                    <ul class="dropdown-menu">
+                        {{ _self.render_menu(link.children) }}
+                    </ul>
                 {% endif %}
-                <span>{{ link.getAttributes().label }}</span>
-                {% if link.children %}<span class="caret"></span>{% endif %}
-            </a>
-            {% if link.children %}
-                <ul class="dropdown-menu">
-                    {{ _self.render_menu(link.children) }}
-                </ul>
             {% endif %}
         </li>
     {% endfor %}
