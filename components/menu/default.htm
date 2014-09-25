@@ -1,14 +1,31 @@
 {#
-#### Options for overriding this file####
-# Option 1:
-# Add this DIRECTLY into your page/layout/paritial, change the __SELF__ below (note: NOT the _self)to your
-#    component alias  (eg. menu.menuTree)
-#
-# See the end of this screencast for more and example: http://octobercms.com/blog/post/mastering-components)
-#
-# Option 2:
-# If your overriding this partial using a paritial in your theme, leave the __SELF__ alone
-# See: https://github.com/octobercms/docs/issues/18)
+ #### Options for overriding this file####
+ # Option 1:
+ # Add this DIRECTLY into your page/layout/paritial, change the __SELF__ below (note: NOT the _self)to your
+ #    component alias  (eg. menu.menuTree)
+ #
+ # See the end of this screencast for more and example: http://octobercms.com/blog/post/mastering-components)
+ #
+ # Option 2:
+ # If your overriding this partial using a paritial in your theme, leave the __SELF__ alone
+ # See: https://github.com/octobercms/docs/issues/18)
+ #}
+
+{#
+ # This the __SELF__.menuTree uses octobercms's NestedTree trait.  So on top of all the regular october/laravel methods,
+ #    you can use all sorts of methods with the model.  Here are a few from the NestedTree Trait:
+ #
+ # *   $model->getRoot(); // Returns the highest parent of a node.
+ # *   $model->getRootList(); // Returns an indented array of key and value columns from root.
+ # *   $model->getParent(); // The direct parent node.
+ # *   $model->getParents(); // Returns all parents up the tree.
+ # *   $model->getParentsAndSelf(); // Returns all parents up the tree and self.
+ # *   $model->getChildren(); // Set of all direct child nodes.
+ # *   $model->getSiblings(); // Return all siblings (parent's children).
+ # *   $model->getSiblingsAndSelf(); // Return all siblings and self.
+ # *   $model->getLeaves(); // Returns all final nodes without children.
+ # *   $model->getDepth(); // Returns the depth of a current node.
+ # *   $model->getChildCount(); // Returns number of all children.
 #}
 
 {# Note: Only one levels of sublinks are supported by Bootstrap 3 #}
