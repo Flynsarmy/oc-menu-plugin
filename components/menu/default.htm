@@ -1,5 +1,18 @@
+{#
+#### Options for overriding this file####
+# Option 1:
+# Add this DIRECTLY into your page/layout/paritial, change the __SELF__ below (note: NOT the _self)to your
+#    component alias  (eg. menu.menuTree)
+#
+# See the end of this screencast for more and example: http://octobercms.com/blog/post/mastering-components)
+#
+# Option 2:
+# If your overriding this partial using a paritial in your theme, leave the __SELF__ alone
+# See: https://github.com/octobercms/docs/issues/18)
+#}
+
 {# Note: Only one levels of sublinks are supported by Bootstrap 3 #}
-{# This is usually added in a navbar ul, eg: <ul class="nav navbar-nav navbar-right"> #}
+{# This is usually added inside a navbar ul, eg: <ul class="nav navbar-nav navbar-right"> #}
 {% macro render_menu(links) %}
     {% for code, link in links %}
         <li class=" {{ link.sublinks ? 'dropdown' }} {{ code == currentPage ? 'active' }}">
@@ -27,7 +40,6 @@
     {% endfor %}
 {% endmacro %}
 
-{# If your adding this directly to your page/layout/paritial, change the __SELF__ to your component alias (eg. menu.menuTree) #}
 {% set menuTree = __SELF__.menuTree %}
 
 {{ _self.render_menu(menuTree) }} {# this actually prints the menu #}
