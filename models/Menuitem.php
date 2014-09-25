@@ -21,6 +21,8 @@ class Menuitem extends Model
 	 */
 	public $table = 'flynsarmy_menu_menuitems';
 
+    public $children; // used when building a menu tree.
+
 	// public $implement = ['October.Rain.Database.Behaviors.NestedSetModel'];
 
 	/**

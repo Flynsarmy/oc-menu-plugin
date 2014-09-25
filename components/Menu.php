@@ -1,13 +1,19 @@
 <?php namespace Flynsarmy\Menu\Components;
 
+use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
 use Validator;
 use Cms\Classes\ComponentBase;
 use October\Rain\Support\ValidationException;
 use Flynsarmy\Menu\Models\Menu as MenuModel;
+use Flynsarmy\Menu\Models\Menuitem;
 use System\Classes\ApplicationException;
+use Cms\Classes\Controller;
+
 
 class Menu extends ComponentBase
 {
+
+    public $menuTree;
 
 	public function componentDetails()
 	{
@@ -40,23 +46,40 @@ class Menu extends ComponentBase
 	 */
 	public function onRender()
 	{
-		$menu = MenuModel::find($this->property('menu_id', 0));
-		// Grab a list of menu settings
-		$settings = $menu->getDefaultSettings();
+		//$menu = MenuModel::find($this->property('menu_id', 0));
+		$menu = MenuModel::with('items')->where('id', '=', $this->property('menu_id', 0))->get();
 
-		// Update $settings with any inline paramters they specified on their {% component %}
-		foreach ( $settings as $key => $setting )
-			$settings[$key] = $this->property($key, $setting);
-		$settings['menu'] = $menu;
-		$settings['selected_item'] = $this->property('selected_item', '');
+        foreach($menu as $singlemenu) // there is only one of these... but eager loading seems to make me do this
+            $this->menuTree= $this->buildTree($singlemenu);
+    }
 
-		// foreach ( $settings as $key => $setting )
-		// 	$this->page[$key] = $setting;
+    /**
+     * Using eager loading and creating my menuTree here uses way less database queries.
+     * The same thing could easily be done in the twig template using methods like getEagerChildren(), but this queries
+     *      the database more.
+     *
+     * @param $elements
+     * @param int $parentId
+     * @return array
+     */
+    function buildTree($elements, $parentId = 0) {
+        $branch = array();
 
-		// // This is an ugly and memory intensive hack required to get around
-		// // Controller not having a getVars() method.
-		// $this->page['settings'] = $settings;
+        if(isset($elements->items)){
+            $items = $elements->items;
+        }
+        else {
+            $items = $elements;
+        }
+        foreach ($items as $element) {
+            if ($element->parent_id == $parentId) {
+                $children = $this->buildTree($items, $element->id);
+                if ($children) {
+                    $element->children = $children;
+                }
+                $branch[] = $element;
+            }
+        }
 
-		return $menu->render($this->controller, $settings);
-	}
-}
+        return $branch;
+    }}
