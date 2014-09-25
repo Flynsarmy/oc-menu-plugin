@@ -42,7 +42,10 @@ class Menu extends ComponentBase
 	 */
 	public function onRender()
 	{
-		$menu = MenuModel::with('items')->where('id', '=', $this->property('menu_id', 0))->get();
+		$menu = MenuModel::with(array('items' => function($query)
+        {
+            $query->where('enabled', '=', '1'); // Make sure to check if enabled.
+        }))->where('id', '=', $this->property('menu_id', 0))->get();
 
         foreach($menu as $singlemenu) // there is only one menu... but eager loading seems to make me do a loop
             $this->menuTree= $this->buildTree($singlemenu, $this->controller);
