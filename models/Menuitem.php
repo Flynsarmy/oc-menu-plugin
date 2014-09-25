@@ -111,6 +111,9 @@ class Menuitem extends Model
 
 	public function render( Controller $controller, array $settings, $depth=0, $url, $child_count=0 )
 	{
+		if ( !$this->enabled )
+			return '';
+
 		// Support custom itemType-specific output
 		if ( class_exists($this->master_object_class) )
 		{
