@@ -28,11 +28,11 @@
  # *   $model->getChildCount(); // Returns number of all children.
 #}
 
-{# Note: Only one levels of sublinks are supported by Bootstrap 3 #}
+{# Note: Only one levels of children are supported by Bootstrap 3 #}
 {# This is usually added inside a navbar ul, eg: <ul class="nav navbar-nav navbar-right"> #}
 {% macro render_menu(links) %}
     {% for code, link in links %}
-        <li class=" {{ link.sublinks ? 'dropdown' }} {{ code == currentPage ? 'active' }}">
+        <li class=" {{ link.children ? 'dropdown' }} {{ code == currentPage ? 'active' }}">
             {% if link.render %}
                 {{ link.render|raw }}
             {% else %}
