@@ -32,7 +32,7 @@ class Plugin extends PluginBase
 				'label'       => 'Menus',
 				'url'         => Backend::url('flynsarmy/menu/menus'),
 				'icon'        => 'icon-bars',
-				'permissions' => ['flynsarmy.menu:*'],
+				'permissions' => ['flynsarmy.menu.*'],
 				'order'       => 500,
 
 				'sideMenu' => [
