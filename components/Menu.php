@@ -9,6 +9,8 @@ use System\Classes\ApplicationException;
 class Menu extends ComponentBase
 {
 
+    public $menuTree;
+
 	public function componentDetails()
 	{
 		return [
@@ -40,23 +42,59 @@ class Menu extends ComponentBase
 	 */
 	public function onRender()
 	{
-		$menu = MenuModel::find($this->property('menu_id', 0));
-		// Grab a list of menu settings
-		$settings = $menu->getDefaultSettings();
+		$menu = MenuModel::with(array('items' => function($query)
+        {
+            $query->where('enabled', '=', '1'); // Make sure to check if enabled.
+        }))->where('id', '=', $this->property('menu_id', 0))->get();
 
-		// Update $settings with any inline paramters they specified on their {% component %}
-		foreach ( $settings as $key => $setting )
-			$settings[$key] = $this->property($key, $setting);
-		$settings['menu'] = $menu;
-		$settings['selected_item'] = $this->property('selected_item', '');
+        foreach($menu as $singlemenu) // there is only one menu... but eager loading seems to make me do a loop
+            $this->menuTree= $this->buildTree($singlemenu, $this->controller);
+    }
 
-		// foreach ( $settings as $key => $setting )
-		// 	$this->page[$key] = $setting;
+    /**
+     * Using eager loading and creating my menuTree here uses way less database queries.
+     * The same thing could easily be done in the twig template using methods like getEagerChildren(), but this queries
+     *      the database more.
+     *
+     * This essentially creates a hierarchical order of the items in the menu.  Something like:
+     *  returned array
+     *      0 = Menuitem {object}
+     *          children = {array}
+     *              0 = Menuitem {object}
+     *              1 = Menuitem {object}
+     *              2 = etc...
+     *      1 = Menuitem {object}
+     *      2 = etc...
+     *
+     * @param $items
+     * @param int $parentId
+     * @param $controller
+     * @return array
+     */
+    function buildTree($items, $controller, $parentId = 0) {
+        $branch = array();
 
-		// // This is an ugly and memory intensive hack required to get around
-		// // Controller not having a getVars() method.
-		// $this->page['settings'] = $settings;
+        // check if this is the first run through of this function
+        if(isset($items->items)){
+            $items = $items->items;
+        }
 
-		return $menu->render($this->controller, $settings);
-	}
-}
+        foreach ($items as $item) {
+            if ($item->parent_id == $parentId) {
+                $children = $this->buildTree($items, $controller, $item->id);
+                if ($children) {
+                    $item->children = $children;
+                }
+                // Support custom itemType-specific output
+                if ( class_exists($item->master_object_class) )
+                {
+                    $itemTypeObj = new $item->master_object_class;
+                    if ( $render = $itemTypeObj->onRender($item, $controller) )
+                        $item->render = $render;
+                }
+                $branch[] = $item;
+            }
+        }
+
+        return $branch;
+    }}

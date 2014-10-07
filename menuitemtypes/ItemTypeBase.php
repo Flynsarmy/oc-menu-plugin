@@ -80,5 +80,5 @@ abstract class ItemTypeBase
 	 *
 	 * @return string
 	 */
-	public function onRender(MenuItem $item, Controller $controller, array $settings, $depth=0, $url, $child_count=0) {}
+	public function onRender(MenuItem $item, Controller $controller) {}
 }

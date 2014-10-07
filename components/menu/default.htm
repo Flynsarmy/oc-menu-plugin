@@ -1,5 +1,63 @@
-{{ before_menu|format(menu.id, menu.name|e, menu.short_desc|e)|raw }}
-	{% for item in menu.items().getNested() %}
-		{% partial __SELF__~"::item" item=item url=item.getUrl() child_count=item.getChildren().count() %}
-	{% endfor %}
-{{ after_menu|format(menu.id, menu.name|e, menu.short_desc|e)|raw }}
+{#
+ #### Options for overriding this file####
+ # Option 1:
+ # Add this DIRECTLY into your page/layout/paritial, change the __SELF__ below (note: NOT the _self)to your
+ #    component alias  (eg. menu.menuTree)
+ #
+ # See the end of this screencast for more and example: http://octobercms.com/blog/post/mastering-components)
+ #
+ # Option 2:
+ # If your overriding this partial using a paritial in your theme, leave the __SELF__ alone
+ # See: https://github.com/octobercms/docs/issues/18)
+ #}
+
+{#
+ # This the __SELF__.menuTree uses octobercms's NestedTree trait.  So on top of all the regular october/laravel methods,
+ #    you can use all sorts of methods with the model.  Here are a few from the NestedTree Trait:
+ #
+ # *   $model->getRoot(); // Returns the highest parent of a node.
+ # *   $model->getRootList(); // Returns an indented array of key and value columns from root.
+ # *   $model->getParent(); // The direct parent node.
+ # *   $model->getParents(); // Returns all parents up the tree.
+ # *   $model->getParentsAndSelf(); // Returns all parents up the tree and self.
+ # *   $model->getChildren(); // Set of all direct child nodes.
+ # *   $model->getSiblings(); // Return all siblings (parent's children).
+ # *   $model->getSiblingsAndSelf(); // Return all siblings and self.
+ # *   $model->getLeaves(); // Returns all final nodes without children.
+ # *   $model->getDepth(); // Returns the depth of a current node.
+ # *   $model->getChildCount(); // Returns number of all children.
+#}
+
+{# Note: Only one levels of children are supported by Bootstrap 3 #}
+{# This is usually added inside a navbar ul, eg: <ul class="nav navbar-nav navbar-right"> #}
+{% macro render_menu(links) %}
+    {% for code, link in links %}
+        <li class=" {{ link.children ? 'dropdown' }} {{ code == currentPage ? 'active' }}">
+            {% if link.render %}
+                {{ link.render|raw }}
+            {% else %}
+                <a href="{{ link.children ? '#' : (link.page)|page }}"
+                   {% if link.children %}data-toggle="dropdown"{% endif %}
+                   class="{{ link.children ? 'dropdown-toggle' }}"
+                        >
+                    {% if link.getAttributes().icon %}
+                        <i class="fa {{ link.getAttributes().icon ? link.getAttributes().icon :
+                        (menu.getAttributes().default_icon ? menu.getAttributes().default_icon) }}"></i>
+                    {% endif %}
+                    <span>{{ link.getAttributes().label }}</span>
+                    {% if link.children %}<span class="caret"></span>{% endif %}
+                </a>
+                {% if link.children %}
+                    <ul class="dropdown-menu">
+                        {{ _self.render_menu(link.children) }}
+                    </ul>
+                {% endif %}
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endmacro %}
+
+{% set menuTree = __SELF__.menuTree %}
+
+{{ _self.render_menu(menuTree) }} {# this actually prints the menu #}
+
