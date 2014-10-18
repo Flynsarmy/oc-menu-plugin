@@ -18,3 +18,5 @@
     - add_menuitem_data_field.php
 1.0.12:
     - Don't show disabled menu items
+1.0.13:
+    - Link fields can now be left empty - will produce a # URL, improved translations

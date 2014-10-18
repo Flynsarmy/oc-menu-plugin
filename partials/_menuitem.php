@@ -11,13 +11,13 @@
 		sprintf($settings['after_nourl_item_label'], $this->id, $this->id_attrib, $this->getClassAttrib($settings, $depth), $depth, $this->title_attrib); //<span class="title">
 
 	if ( $child_count || $settings['always_show_before_after_children'] )
-		$output .= sprintf($settings['before_children']);
+		$output .= sprintf($settings['before_children'], $url, $this->id, $this->id_attrib, $this->getClassAttrib($settings, $depth), $depth, $this->title_attrib);
 
 		foreach ( $this->getChildren() as $child )
 			$output .= $child->render($controller, $settings, ++$depth, $child->getUrl(), $child->children->count());
 
 	if ( $child_count || $settings['always_show_before_after_children'] )
-		$output .= sprintf($settings['after_children']);
+		$output .= sprintf($settings['after_children'], $url, $this->id, $this->id_attrib, $this->getClassAttrib($settings, $depth), $depth, $this->title_attrib);
 
 	$output .= sprintf($settings['after_item'], $this->id, $this->id_attrib, $this->getClassAttrib($settings, $depth), $this->title_attrib);
 

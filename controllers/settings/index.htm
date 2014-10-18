@@ -1,7 +1,7 @@
 <?php Block::put('breadcrumb') ?>
 	<ul>
 		<li><a href="<?= Backend::url('flynsarmy/menu/menus') ?>">Menus</a></li>
-		<li><?= e($this->pageTitle) ?></li>
+		<li><?= e(trans($this->pageTitle)) ?></li>
 	</ul>
 <?php Block::endPut() ?>
 
@@ -18,8 +18,7 @@
                     type="submit"
                     data-request="onSave"
                     data-request-data="redirect:0"
-                    data-hotkey="ctrl+s"
-                    data-hotkey-mac="cmd+s"
+                    data-hotkey="ctrl+s, cmd+s"
                     data-load-indicator="<?= e(trans('backend::lang.form.saving')) ?>"
                     class="btn btn-primary">
                     <?= e(trans('backend::lang.form.save')) ?>
@@ -31,7 +30,7 @@
 
 <?php else: ?>
 
-	<p class="flash-message static error"><?= e($this->fatalError) ?></p>
+	<p class="flash-message static error"><?= e(trans($this->fatalError)) ?></p>
 	<p><a href="<?= Backend::url('flynsarmy/menu/menus') ?>" class="btn btn-default">Return to menu list</a></p>
 
 <?php endif ?>

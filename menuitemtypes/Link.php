@@ -18,7 +18,7 @@ class Link extends ItemTypeBase
 		$form->addFields([
 			'url' => [
 				'label' => 'URL',
-				'comment' => 'Enter the URL above.',
+				'comment' => 'Enter the URL above. Leave blank for #',
 				'type' => 'text',
 				'tab' => 'Item',
 			],
@@ -41,8 +41,7 @@ class Link extends ItemTypeBase
 	 */
 	public function extendItemModel(MenuItem $item)
 	{
-		$item->rules['url'] = 'required|url';
-		$item->customMessages['url.required'] = 'The Link field is required.';
+		$item->rules['url'] = 'url';
 		$item->customMessages['url.url'] = 'The Link field must be a valid URL.';
 	}
 
@@ -55,6 +54,6 @@ class Link extends ItemTypeBase
 	 */
 	public function getUrl(MenuItem $item)
 	{
-		return $item->url;
+		return $item->url ?: '#';
 	}
 }
