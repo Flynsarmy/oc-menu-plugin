@@ -10,7 +10,7 @@ class AddMenuitemDataField extends Migration
 	{
 		Schema::table('flynsarmy_menu_menuitems', function($table)
 		{
-			$table->text('data')->default('');
+			$table->text('data')->nullable();
 		});
 	}
 
