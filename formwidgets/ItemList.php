@@ -35,8 +35,8 @@ class ItemList extends FormWidgetBase
 	 */
 	public function prepareVars()
 	{
-		$sessionKey = $this->controller->widget->formItems->sessionKey;
-		$columnName = $this->columnName;
+        $sessionKey = $this->controller->widget->formItems->sessionKey;
+		$columnName = $this->valueFrom;
 
 		$this->vars['itemTypes'] = MenuManager::instance()->listItemTypes();
 		$this->vars['name'] = $this->formField->getName();

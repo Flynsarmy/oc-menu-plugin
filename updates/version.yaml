@@ -22,3 +22,5 @@
     - Link fields can now be left empty - will produce a # URL, improved translations
 1.0.14:
     - Menu Item data field should be nullable
+1.0.15:
+    - RC compatibility
