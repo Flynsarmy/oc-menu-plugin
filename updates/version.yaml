@@ -24,3 +24,5 @@
     - Menu Item data field should be nullable
 1.0.15:
     - RC compatibility
+1.0.16:
+    - Settings page code cleanup
