@@ -16,13 +16,8 @@
 1.0.11:
     - Add slug parameters option for Page items
     - add_menuitem_data_field.php
-1.0.12:
-    - Don't show disabled menu items
-1.0.13:
-    - Link fields can now be left empty - will produce a # URL, improved translations
-1.0.14:
-    - Menu Item data field should be nullable
-1.0.15:
-    - RC compatibility
-1.0.16:
-    - Settings page code cleanup
+1.0.12: Don't show disabled menu items
+1.0.13: Link fields can now be left empty - will produce a # URL, improved translations
+1.0.14: Menu Item data field should be nullable
+1.0.15: RC compatibility
+1.0.16: Settings page code cleanup
