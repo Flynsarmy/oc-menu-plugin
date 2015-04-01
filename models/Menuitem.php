@@ -124,4 +124,9 @@ class Menuitem extends Model
 
 		return require __DIR__.'/../partials/_menuitem.php';
 	}
+
+	public function beforeCreate() 
+	{ 
+		$this->setDefaultLeftAndRight(); 
+	}
 }
