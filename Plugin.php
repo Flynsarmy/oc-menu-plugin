@@ -21,7 +21,8 @@ class Plugin extends PluginBase
 			'name'        => 'Menu',
 			'description' => 'Create flexible menus straight from October CMS admin',
 			'author'      => 'Flyn San',
-			'icon'        => 'icon-bars'
+			'icon'        => 'icon-bars',
+            'homepage'    => 'https://github.com/Flynsarmy/oc-menu-plugin'
 		];
 	}
 
