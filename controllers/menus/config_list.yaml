@@ -3,7 +3,7 @@
 # ===================================
 
 # Model List Column configuration
-list: @/plugins/flynsarmy/menu/models/menu/columns.yaml
+list: $/flynsarmy/menu/models/menu/columns.yaml
 
 # Model Class name
 modelClass: Flynsarmy\Menu\Models\Menu

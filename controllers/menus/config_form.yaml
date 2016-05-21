@@ -6,7 +6,7 @@
 name: Menu
 
 # Model Form Field configuration
-form: @/plugins/flynsarmy/menu/models/menu/fields.yaml
+form: $/flynsarmy/menu/models/menu/fields.yaml
 
 # Model Class name
 modelClass: Flynsarmy\Menu\Models\Menu

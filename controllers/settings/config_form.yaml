@@ -2,6 +2,6 @@
 #  Form Behavior Config
 # ===================================
 
-form: @/plugins/flynsarmy/menu/models/settings/fields.yaml
+form: $/flynsarmy/menu/models/settings/fields.yaml
 modelClass: Flynsarmy\Menu\Models\Settings
 defaultRedirect: flynsarmy/menu/settings
