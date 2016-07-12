@@ -24,3 +24,6 @@
 1.0.17: Fix nested tree bug
 1.0.18: Deprecated code fix
 1.0.19: Deprecated code fix
+1.0.20:
+    - Menu save fix
+    - make_menuitem_menu_id_nullable.php
