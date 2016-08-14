@@ -130,7 +130,7 @@ class ItemList extends FormWidgetBase
 			/*
 			 * Create a form widget to render the form
 			 */
-			$config = $this->makeConfig('@/plugins/flynsarmy/menu/models/menuitem/fields.yaml');
+			$config = $this->makeConfig('$/flynsarmy/menu/models/menuitem/fields.yaml');
 			$config->model = $item;
 			$config->context = 'edit';
 			$form = $this->makeWidget('Backend\Widgets\Form', $config);
