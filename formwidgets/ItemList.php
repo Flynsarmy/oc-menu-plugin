@@ -5,6 +5,7 @@ use Backend\Classes\FormWidgetBase;
 use Flynsarmy\Menu\Models\Menu;
 use Flynsarmy\Menu\Models\MenuItem;
 use Flynsarmy\Menu\Classes\MenuManager;
+use Backend\Classes\FormField;
 use Exception;
 
 /**
@@ -50,6 +51,12 @@ class ItemList extends FormWidgetBase
 	{
 		// $this->addJs('js/itemlist.js');
 	}
+
+	public function getSaveValue($value)
+    {
+        //  The form field should not contribute any save data.
+        return FormField::NO_SAVE_DATA;
+    }
 
 	public function onLoadTypeSelection()
 	{
@@ -130,7 +137,7 @@ class ItemList extends FormWidgetBase
 			/*
 			 * Create a form widget to render the form
 			 */
-			$config = $this->makeConfig('@/plugins/flynsarmy/menu/models/menuitem/fields.yaml');
+			$config = $this->makeConfig('$/flynsarmy/menu/models/menuitem/fields.yaml');
 			$config->model = $item;
 			$config->context = 'edit';
 			$form = $this->makeWidget('Backend\Widgets\Form', $config);
